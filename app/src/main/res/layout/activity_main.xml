@@ -6,54 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inicia sesión"
-        android:textSize="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.322"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña:"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="500dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:text="Ingresar"
-        android:textSize="22dp"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="633dp" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="545dp" />
-
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Usuario"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="423dp" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="197dp"
+        android:layout_height="197dp"
+        app:srcCompat="@drawable/bibliotecalogin"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="105dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -62,7 +21,58 @@
         android:text="Usuario:"
         android:textSize="25dp"
         tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="366dp" />
+        tools:layout_editor_absoluteY="421dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicia sesión"
+        android:textFontWeight="800"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña:"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="555dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="600dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="Ingresar"
+        android:textSize="22dp"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="688dp" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Nombre de usuario"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="478dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -71,6 +81,6 @@
         android:text="Crear cuenta"
         android:textSize="18dp"
         tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="695dp" />
+        tools:layout_editor_absoluteY="750dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
