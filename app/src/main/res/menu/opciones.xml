@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_lista_libros"
+        android:title="Lista de Libros" />
+    <item
+        android:id="@+id/nav_solicitud_prestamo"
+        android:title="Solicitud de Préstamo" />
+    <item
+        android:id="@+id/nav_registro_devolucion"
+        android:title="Registro de Devolución" />
+    <item
+        android:id="@+id/nav_cerrar_sesion"
+        android:title="Cerrar Sesión" />
+</menu>
