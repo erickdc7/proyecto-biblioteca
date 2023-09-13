@@ -6,37 +6,79 @@
     app:startDestination="@id/loginFragment">
 
     <!-- Pantalla de inicio de sesión (login) -->
-    <fragment
+    <activity
         android:id="@+id/loginFragment"
-        android:name="com.erickdiaz.proyectobiblioteca.loginbiblio"
-        android:label="LoginFragment"
+        android:label="Login"
         tools:layout="@layout/activity_login">
 
         <action
             android:id="@+id/action_login_to_home"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_home_to_login"
             app:destination="@id/main" />
-    </fragment>
+    </activity>
 
     <!-- Pantalla de registro de usuario -->
-    <fragment
+    <activity
         android:id="@+id/main"
-        android:name="com.erickdiaz.proyectobiblioteca.ui.home.HomeFragment"
         android:label="RegistroUsuarioFragment"
         tools:layout="@layout/activity_main" >
 
-    </fragment>
-
-    <!-- Pantalla principal (home) -->
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.erickdiaz.proyectobiblioteca.registro_usuario"
-        android:label="HomeFragment"
-        tools:layout="@layout/register_activity">
+        <!-- Agrega una acción para ir a activity_opciones -->
         <action
-            android:id="@+id/action_home_to_login"
+            android:id="@+id/action_main_to_opciones"
+            app:destination="@id/activity_opciones" />
+
+    </activity>
+
+    <!-- Pantalla de opciones -->
+    <activity
+        android:id="@+id/activity_opciones"
+        android:label="Actividad de Opciones"
+        tools:layout="@layout/activity_opciones" >
+
+        <!-- Agrega una acción para ir a solicitud -->
+        <action
+            app:destination="@id/solicitud" />
+        <action
+            app:destination="@id/solicitudprestamo" />
+
+    </activity>
+
+    <!-- Pantalla de solicitud -->
+    <activity
+        android:id="@+id/solicitud"
+        android:label="Actividad de Solicitud"
+        tools:layout="@layout/solicitud" >
+
+        <action
+            android:id="@+id/action_solicitudprestamo_to_main"
             app:destination="@id/main" />
-    </fragment>
+
+
+    </activity>
+
+    <!-- Pantalla de solicitud de préstamo -->
+    <activity
+        android:id="@+id/solicitudprestamo"
+        android:label="Actividad de Solicitud de Préstamo"
+        tools:layout="@layout/solicitudprestamo" >
+
+        <action
+            android:id="@+id/action_solicitudprestamo_to_main"
+            app:destination="@id/main" />
+
+    </activity>
+
+    <!-- Pantalla de registro de usuario -->
+    <activity
+        android:id="@+id/register_activity"
+        android:label="Actividad de Registro de Usuario"
+        tools:layout="@layout/register_activity">
+
+        <!-- Agrega una acción para ir a main -->
+        <action
+            android:id="@+id/action_register_to_main"
+            app:destination="@id/main" />
+
+    </activity>
+
 </navigation>
