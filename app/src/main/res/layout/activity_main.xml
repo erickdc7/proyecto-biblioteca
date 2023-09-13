@@ -21,8 +21,6 @@
         android:text="Bienvenido a la Biblioteca"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp" />
-
-
+        android:layout_marginTop="24dp" />
 
 </LinearLayout>
