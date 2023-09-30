@@ -58,6 +58,6 @@ public class registro_usuario extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_usuario, container, false);
+        return inflater.inflate(R.layout.register_activity, container, false);
     }
 }
