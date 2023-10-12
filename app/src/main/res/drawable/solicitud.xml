@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="210dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/libro1"
+        android:contentDescription="@string/aqui_va_la_imagen" />
+
+    <TextView
+        android:id="@+id/labelRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/registro_de_devolucion"
+        android:textSize="30sp"
+        android:textAlignment="textStart"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/labelUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="@string/usuario"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/labelRegistro"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/editUsuario"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/labelUsuario"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:contentDescription="Ingrese Usuario"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        tools:ignore="TouchTargetSizeCheck,EditableContentDescCheck" />
+
+    <TextView
+        android:id="@+id/NombreLibro"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Nombre del Libro"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/editUsuario"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/editNombreLibro"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/NombreLibro"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:contentDescription="Ingrese Libro"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,EditableContentDescCheck"
+        />
+    <TextView
+        android:id="@+id/FechaPrestamo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Fecha de Prestamo"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/editNombreLibro"
+        android:layout_marginTop="20dp"
+        />
+    <EditText
+        android:id="@+id/editFechaPrestamo"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/FechaPrestamo"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:contentDescription="Ingrese FechaP"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,EditableContentDescCheck"
+        />
+    <TextView
+        android:id="@+id/FechaDevolucion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Fecha de Devolucion"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/editFechaPrestamo"
+        android:layout_marginTop="20dp"
+        />
+    <EditText
+        android:id="@+id/editFechaDevolucion"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/FechaDevolucion"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:contentDescription="Ingrese FechaD"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,EditableContentDescCheck"
+        />
+
+    <Button
+        android:id="@+id/Botonconfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:text="Confirmar Devolucion"
+        app:layout_constraintStart_toStartOf="@+id/editFechaDevolucion"
+        app:layout_constraintTop_toBottomOf="@+id/editFechaDevolucion" />
+
+    <Button
+        android:id="@+id/BotonRegresar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="48dp"
+        android:text="Regresar al Menu"
+        app:layout_constraintStart_toEndOf="@+id/Botonconfirm"
+        app:layout_constraintTop_toBottomOf="@+id/editFechaDevolucion" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
