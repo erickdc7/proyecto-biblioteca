@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ferpat.pruebasoli.R;
+import com.erickdiaz.proyectobiblioteca.R;
 
 import java.util.List;
 
