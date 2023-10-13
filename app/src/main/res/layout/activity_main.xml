@@ -5,21 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="69dp"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
-        android:contentDescription="Logo de la Biblioteca"
         android:src="@drawable/logoutp" />
 
 
-
-    <!-- RecyclerView para mostrar la lista de libros -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="511dp" />
+        android:layout_height="match_parent" />
+
+
 </LinearLayout>
