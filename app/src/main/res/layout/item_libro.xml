@@ -11,7 +11,7 @@
         android:id="@+id/portadaImageView"
         android:layout_width="80dp"
         android:layout_height="120dp"
-        android:src="@drawable/portada_placeholder" />
+        android:src="@drawable/portada1" />
 
     <!-- LinearLayout vertical para el título y el autor -->
     <LinearLayout
