@@ -9,15 +9,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="84dp"
-        android:layout_height="83dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo-utp.png" />
+        app:srcCompat="@drawable/logoutp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -28,17 +27,17 @@
         android:textFontWeight="800"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/etNombres"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintBottom_toTopOf="@+id/etNombres" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/etNombres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="50dp"
         android:hint="Nombres"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +126,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="50dp"
         android:text="Registrar"
         android:textSize="18sp"
