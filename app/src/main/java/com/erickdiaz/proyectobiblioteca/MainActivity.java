@@ -17,16 +17,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // Inicializa la lista de libros
         listaLibros = new ArrayList<>();
-        listaLibros.add(new Libro("Don Quijote de la Mancha", "Miguel de Cervantes"));
-        listaLibros.add(new Libro("Cien años de soledad", "Gabriel García Márquez"));
-        listaLibros.add(new Libro("1984", "George Orwell"));
-        listaLibros.add(new Libro("Matar un ruiseñor", "Harper Lee"));
-        listaLibros.add(new Libro("El Gran Gatsby", "F. Scott Fitzgerald"));
-        listaLibros.add(new Libro("Los juegos del hambre", "Suzanne Collins"));
-        listaLibros.add(new Libro("El Señor de los Anillos", "J.R.R. Tolkien"));
-        listaLibros.add(new Libro("Harry Potter y la piedra filosofal", "J.K. Rowling"));
+
+        // Agrega libros a la lista
+        listaLibros.add(new Libro("Don Quijote de la Mancha", "Miguel de Cervantes", R.drawable.portada1));
+        listaLibros.add(new Libro("Cien años de soledad", "Gabriel García Márquez", R.drawable.portada1));
+        listaLibros.add(new Libro("1984", "George Orwell", R.drawable.portada1));
+
+        // Agrega más libros aquí
 
         // Configura el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
@@ -34,5 +33,4 @@ public class MainActivity extends AppCompatActivity {
         libroAdapter = new LibroAdapter(listaLibros);
         recyclerView.setAdapter(libroAdapter);
     }
-
 }

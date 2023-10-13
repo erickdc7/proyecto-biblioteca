@@ -10,24 +10,26 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.erickdiaz.proyectobiblioteca.databinding.FragmentGalleryBinding;
 
+
+
 public class GalleryFragment extends Fragment {
 
-private FragmentGalleryBinding binding;
+    private GalleryViewModel galleryViewModel;
+    private FragmentGalleryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+                             ViewGroup container, Bundle savedInstanceState) {
+        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
 
-    binding = FragmentGalleryBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        galleryViewModel.getText().observe(getViewLifecycleOwner(), text -> textView.setText(text));
         return root;
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;

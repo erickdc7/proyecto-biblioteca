@@ -9,26 +9,17 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="112dp"
+        android:layout_width="150dp"
         android:layout_height="69dp"
         android:layout_gravity="center"
         android:contentDescription="Logo de la Biblioteca"
         android:src="@drawable/logoutp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Bienvenido a la Biblioteca"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+
 
     <!-- RecyclerView para mostrar la lista de libros -->
-    <!-- activity_main.xml -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
+        android:layout_height="511dp" />
 </LinearLayout>

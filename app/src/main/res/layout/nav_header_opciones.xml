@@ -10,16 +10,16 @@
     android:background="?attr/colorPrimaryDark">
 
     <ImageView
-        android:layout_width="64dp"
+        android:layout_width="150dp"
         android:layout_height="64dp"
-        android:src="@drawable/bibliotecalogin"
+        android:src="@drawable/logoutp"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/app_name" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Biblioteca"
+        android:text="BIBLIOTECA UTP"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"

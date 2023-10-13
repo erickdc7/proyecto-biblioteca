@@ -15,22 +15,21 @@
 
     <!-- LinearLayout vertical para el título y el autor -->
     <LinearLayout
-        android:layout_width="224dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tituloTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Título del Libro" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/autorTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Autor del Libro" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>
