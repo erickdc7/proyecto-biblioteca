@@ -12,12 +12,12 @@
         android:layout_width="84dp"
         android:layout_height="83dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bibliotecalogin" />
+        app:srcCompat="@drawable/logo-utp.png" />
 
     <TextView
         android:id="@+id/textView4"
@@ -113,8 +113,8 @@
         android:id="@+id/etRepeatPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="50dp"
         android:hint="Repetir Contraseña"
         android:inputType="textPassword"
@@ -126,8 +126,8 @@
         android:id="@+id/btnRegistrar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="50dp"
         android:text="Registrar"
         android:textSize="18sp"
