@@ -15,7 +15,6 @@
         android:contentDescription="Logo de la Biblioteca"
         android:src="@drawable/logoutp" />
 
-    <!-- RecyclerView para mostrar la lista de libros -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
