@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/ImageView"
+    android:src="@drawable/logoutp"
+        android:layout_width="210dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/aqui_va_la_imagen"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:ems="10"
+        android:hint="@string/ingrese_usuario"
+        android:inputType="text"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintTop_toBottomOf="@+id/ImageView"
+        tools:ignore="Autofill,MissingConstraints,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="30dp" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="92dp"
+        android:hint="@string/contrase_a"
+        android:inputType="textPassword"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
+        tools:layout_editor_absoluteX="30dp"
+        tools:ignore="Autofill,MissingConstraints" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="@string/ingresar"
+        android:onClick="irMenuP"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="40dp" />
+
+    <Button
+        android:id="@+id/CrearUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="68dp"
+        android:onClick="RegistrarUsu"
+        android:text="@string/registrar"
+        app:layout_constraintStart_toEndOf="@+id/buttonLogin"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
