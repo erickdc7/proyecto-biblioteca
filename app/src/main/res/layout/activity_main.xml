@@ -9,18 +9,24 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/bibliotecalogin"
+        android:layout_width="112dp"
+        android:layout_height="69dp"
+        android:layout_gravity="center"
         android:contentDescription="Logo de la Biblioteca"
-        android:layout_gravity="center" />
+        android:src="@drawable/logoutp" />
 
+    <!-- RecyclerView para mostrar la lista de libros -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Bienvenido a la Biblioteca"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp" />
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
