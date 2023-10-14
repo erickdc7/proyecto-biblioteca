@@ -7,9 +7,9 @@
     <ImageView
         android:id="@+id/bookCover"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/portada_1984"
-        android:scaleType="centerCrop" />
+        android:layout_height="148dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/portada_1984" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -45,11 +45,11 @@
 
         <TextView
             android:id="@+id/availabilityTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Availability: Sample Availability"
-            android:textSize="16sp"
-            android:textColor="#666666" />
+            android:text="Disponiblididad"
+            android:textColor="#666666"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/reserveButton"

@@ -31,6 +31,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = books.get(position);
         holder.titleTextView.setText(book.getTitle());
         holder.authorTextView.setText(book.getAuthor());
+        holder.categoryTextView.setText(book.getCategory());
+        holder.availabilityTextView.setText(book.getAvailability());
         // Configura otros datos en book_item.xml
     }
 
@@ -42,12 +44,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public class BookViewHolder extends RecyclerView.ViewHolder {
         public TextView titleTextView;
         public TextView authorTextView;
+        public TextView categoryTextView;
+        public TextView availabilityTextView;
 
         public BookViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             authorTextView = itemView.findViewById(R.id.authorTextView);
-            // Incluye otros TextViews u elementos de book_item.xml aquí
+            categoryTextView = itemView.findViewById(R.id.categoryTextView);
+            availabilityTextView = itemView.findViewById(R.id.availabilityTextView);
+            // Agrega referencias a otros elementos de book_item.xml aquí
         }
     }
+
 }
