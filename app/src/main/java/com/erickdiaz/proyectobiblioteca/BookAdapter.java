@@ -1,39 +1,34 @@
 package com.erickdiaz.proyectobiblioteca;
-
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.erickdiaz.proyectobiblioteca.R;
-
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
-
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> books;
 
     public BookAdapter(List<Book> books) {
         this.books = books;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_item, parent, false);
-        return new ViewHolder(view);
+    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View bookView = inflater.inflate(R.layout.book_item, parent, false);
+        return new BookViewHolder(bookView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = books.get(position);
-        holder.bookCover.setImageResource(book.getCoverResource());
-        holder.bookTitle.setText(book.getTitle());
-        holder.bookAuthor.setText(book.getAuthor());
-        // Configura el botón de reserva aquí.
+        holder.titleTextView.setText(book.getTitle());
+        holder.authorTextView.setText(book.getAuthor());
     }
 
     @Override
@@ -41,18 +36,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         return books.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView bookCover;
-        public TextView bookTitle;
-        public TextView bookAuthor;
-        public Button reserveButton;
+    public class BookViewHolder extends RecyclerView.ViewHolder {
+        public TextView titleTextView;
+        public TextView authorTextView;
 
-        public ViewHolder(View itemView) {
+        public BookViewHolder(View itemView) {
             super(itemView);
-            bookCover = itemView.findViewById(R.id.bookCover);
-            bookTitle = itemView.findViewById(R.id.bookTitle);
-            bookAuthor = itemView.findViewById(R.id.bookAuthor);
-            reserveButton = itemView.findViewById(R.id.reserveButton);
+            titleTextView = itemView.findViewById(R.id.titleTextView);
+            authorTextView = itemView.findViewById(R.id.authorTextView);
         }
     }
 }
+

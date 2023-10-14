@@ -3,13 +3,20 @@ package com.erickdiaz.proyectobiblioteca;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -23,37 +30,55 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Aquí debes crear una lista ficticia de libros o cargarla desde una fuente de datos.
-        List<Book> books = createSampleBookList();
-
-        bookAdapter = new BookAdapter(books);
-        recyclerView.setAdapter(bookAdapter);
+        // Carga los libros desde la API
+        loadBooksFromApi();
     }
 
-    // Método para crear una lista ficticia de libros
-    private List<Book> createSampleBookList() {
+    private void loadBooksFromApi() {
+        String apiUrl = "https://proyecto-biblioteca-utp.000webhostapp.com/Obtener_libros.php";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, apiUrl, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                List<Book> books = parseBooksFromJson(response);
+                bookAdapter = new BookAdapter(books);
+                recyclerView.setAdapter(bookAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Manejar errores de solicitud
+            }
+        });
+
+        queue.add(jsonArrayRequest);
+    }
+
+    private List<Book> parseBooksFromJson(JSONArray jsonArray) {
         List<Book> books = new ArrayList<>();
-        // Agrega libros ficticios a la lista aquí.
-        books.add(new Book(R.drawable.portada_1984, "1984", "George Orwell"));
-        books.add(new Book(R.drawable.portada_matar_ruisenor, "Matar un ruiseñor", "Harper Lee"));
-        books.add(new Book(R.drawable.portada_cien_anios_soledad, "Cien años de soledad", "Gabriel García Márquez"));
-        books.add(new Book(R.drawable.portada_gran_gatsby, "El Gran Gatsby", "F. Scott Fitzgerald"));
-        books.add(new Book(R.drawable.portada_don_quijote, "Don Quijote de la Mancha", "Miguel de Cervantes Saavedra"));
-        books.add(new Book(R.drawable.portada_crimen_castigo, "Crimen y castigo", "Fyodor Dostoevsky"));
-        books.add(new Book(R.drawable.portada_mujer_punto_cero, "Mujer en punto cero", "Nawal El Saadawi"));
-        books.add(new Book(R.drawable.portada_odisea, "La Odisea", "Homero"));
-        books.add(new Book(R.drawable.portada_tiempo_perdido, "En busca del tiempo perdido", "Marcel Proust"));
-        books.add(new Book(R.drawable.portada_matar_elefante, "Matar a un elefante", "George Orwell"));
-        // Agrega más libros si es necesario.
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject bookObject = jsonArray.getJSONObject(i);
+                int id = bookObject.getInt("id");
+                String title = bookObject.getString("titulo");
+                String author = bookObject.getString("autor");
+                // Agrega más campos según sea necesario
+
+                books.add(new Book(id, title, author));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return books;
     }
 
-    public void irLogin(View v){
+    public void irLogin(View v) {
         Intent men = new Intent(this, LoginActivity.class);
         startActivity(men);
     }
 
-    public void iraRegistro(View v){
+    public void iraRegistro(View v) {
         Intent reg = new Intent(this, UsuarioActivity.class);
         startActivity(reg);
     }

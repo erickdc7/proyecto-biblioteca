@@ -1,48 +1,36 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- book_item.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="16dp">
-
     <ImageView
         android:id="@+id/bookCover"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/portada_1984"
         android:scaleType="centerCrop" />
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="16dp">
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/bookTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sample Title"
-            android:textSize="18sp"
-            android:textColor="#333333"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/bookAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sample Author"
-            android:textSize="16sp"
-            android:textColor="#666666" />
-
-        <Button
-            android:id="@+id/reserveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="ir"
-            android:text="Reservar"
-            android:textColor="#FFFFFF"
-            android:background="#007ACC"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/authorTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+    <Button
+        android:id="@+id/reserveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="ir"
+        android:text="Reservar"
+        android:textColor="#FFFFFF"
+        android:background="#007ACC"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
+
