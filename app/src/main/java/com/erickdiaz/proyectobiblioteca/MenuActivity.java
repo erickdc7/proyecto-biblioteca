@@ -1,25 +1,27 @@
 package com.erickdiaz.proyectobiblioteca;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import android.util.Log;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
+    private RequestQueue requestQueue;
     private RecyclerView recyclerView;
     private BookAdapter bookAdapter;
 
@@ -28,52 +30,58 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        requestQueue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Carga los libros desde la API
-        loadBooksFromApi();
-    }
+        // Realizar una solicitud GET a la API
+        String apiUrl = "https://proleptic-coil.000webhostapp.com/Obtener_libros.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, apiUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            int estado = response.getInt("estado");
+                            if (estado == 1) {
+                                JSONArray librosArray = response.getJSONArray("libros");
 
-    private void loadBooksFromApi() {
-        String apiUrl = "https://proyecto-biblioteca-utp.000webhostapp.com/Obtener_libros.php";
-        RequestQueue queue = Volley.newRequestQueue(this);
+                                List<Book> books = new ArrayList<>();
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, apiUrl, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                List<Book> books = parseBooksFromJson(response);
-                Log.d("BookAdapter", "Number of books: " + books.size()); // Agregar este registro
-                bookAdapter = new BookAdapter(books);
-                recyclerView.setAdapter(bookAdapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Manejar errores de solicitud
-            }
-        });
+                                for (int i = 0; i < librosArray.length(); i++) {
+                                    JSONObject bookJson = librosArray.getJSONObject(i);
+                                    int id = bookJson.getInt("id");
+                                    String title = bookJson.getString("titulo");
+                                    String author = bookJson.getString("autor");
+                                    String category = bookJson.getString("categoria");
+                                    int availability = bookJson.getInt("disponibilidad");
 
-        queue.add(jsonArrayRequest);
-    }
+                                    Book book = new Book(id, title, author, category, availability);
+                                    books.add(book);
+                                }
 
-    private List<Book> parseBooksFromJson(JSONArray jsonArray) {
-        List<Book> books = new ArrayList<>();
-        try {
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject bookObject = jsonArray.getJSONObject(i);
-                int id = bookObject.getInt("id");
-                String title = bookObject.getString("titulo");
-                String author = bookObject.getString("autor");
-                String category = bookObject.getString("categoria");
-                int availability = bookObject.getInt("disponibilidad");
+                                bookAdapter = new BookAdapter(books);
+                                recyclerView.setAdapter(bookAdapter);
+                            } else {
+                                // Manejar el caso en que el estado no sea 1 (puede ser un error)
+                                Toast.makeText(MenuActivity.this, "Error al obtener los libros.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Manejar errores, como problemas de red o respuesta incorrecta
+                        Toast.makeText(MenuActivity.this, "Error de red: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
 
-                books.add(new Book(id, title, author, category, availability));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return books;
+        // Agregar la solicitud a la cola
+        requestQueue.add(jsonObjectRequest);
     }
 
     public void irLogin(View v) {
