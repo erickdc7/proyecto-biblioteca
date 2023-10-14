@@ -1,4 +1,7 @@
 <resources>
+    <string name="homefragment">Home</string>
+    <string name="menu_devolucion">Solicitud devolución</string>
+    <string name="menu_salir">SALIR</string>
     <string name="app_name">BibliotecaUTP</string>
     <string name="registro_de_devolucion">Registro de Devolucion</string>
     <string name="usuario">Usuario</string>
