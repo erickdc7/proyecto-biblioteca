@@ -1,36 +1,31 @@
-<!-- book_item.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
-    <ImageView
-        android:id="@+id/bookCover"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/portada_1984"
-        android:scaleType="centerCrop" />
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/titleTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:text="Title" />
 
     <TextView
         android:id="@+id/authorTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp" />
-    <Button
-        android:id="@+id/reserveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="ir"
-        android:text="Reservar"
-        android:textColor="#FFFFFF"
-        android:background="#007ACC"
-        android:layout_marginTop="16dp" />
-</LinearLayout>
+        android:text="Author" />
 
+    <TextView
+        android:id="@+id/categoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category" />
+
+    <TextView
+        android:id="@+id/availabilityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Availability" />
+</LinearLayout>

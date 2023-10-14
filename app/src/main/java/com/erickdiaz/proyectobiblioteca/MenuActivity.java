@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import android.util.Log;
 
 public class MenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -42,6 +43,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 List<Book> books = parseBooksFromJson(response);
+                Log.d("BookAdapter", "Number of books: " + books.size()); // Agregar este registro
                 bookAdapter = new BookAdapter(books);
                 recyclerView.setAdapter(bookAdapter);
             }
@@ -63,9 +65,10 @@ public class MenuActivity extends AppCompatActivity {
                 int id = bookObject.getInt("id");
                 String title = bookObject.getString("titulo");
                 String author = bookObject.getString("autor");
-                // Agrega más campos según sea necesario
+                String category = bookObject.getString("categoria");
+                int availability = bookObject.getInt("disponibilidad");
 
-                books.add(new Book(id, title, author));
+                books.add(new Book(id, title, author, category, availability));
             }
         } catch (JSONException e) {
             e.printStackTrace();
