@@ -55,12 +55,13 @@ public class MenuActivity extends AppCompatActivity {
                                     String author = bookJson.getString("autor");
                                     String category = bookJson.getString("categoria");
                                     int availability = bookJson.getInt("disponibilidad");
+                                    String coverImageUrl = bookJson.getString("coverImageUrl"); // Obtén la URL de la portada aquí
 
-                                    Book book = new Book(id, title, author, category, availability);
+                                    Book book = new Book(id, title, author, category, availability, coverImageUrl);
                                     books.add(book);
                                 }
 
-                                bookAdapter = new BookAdapter(books);
+                                bookAdapter = new BookAdapter(MenuActivity.this,books);
                                 recyclerView.setAdapter(bookAdapter);
                             } else {
                                 // Manejar el caso en que el estado no sea 1 (puede ser un error)
@@ -69,6 +70,7 @@ public class MenuActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
