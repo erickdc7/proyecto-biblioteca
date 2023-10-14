@@ -5,7 +5,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/coverImageView"
+        android:id="@+id/bookCover"
         android:layout_width="100dp"
         android:layout_height="148dp"
         android:scaleType="centerCrop"
@@ -47,7 +47,7 @@
             android:id="@+id/availabilityTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Availability: Sample Availability"
+            android:text="Disponiblididad"
             android:textColor="#666666"
             android:textSize="16sp" />
 
