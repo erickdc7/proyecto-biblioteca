@@ -55,13 +55,16 @@ public class MenuActivity extends AppCompatActivity {
                                     String author = bookJson.getString("autor");
                                     String category = bookJson.getString("categoria");
                                     int availability = bookJson.getInt("disponibilidad");
+                                    String coverImageUrl = bookJson.getString("coverImageUrl"); // Asegúrate de que esta clave exista en tu JSON
 
-                                    Book book = new Book(id, title, author, category, availability);
+                                    Book book = new Book(id, title, author, category, availability, coverImageUrl);
                                     books.add(book);
                                 }
 
-                                bookAdapter = new BookAdapter(books);
+                                bookAdapter = new BookAdapter(MenuActivity.this, books);
                                 recyclerView.setAdapter(bookAdapter);
+
+
                             } else {
                                 // Manejar el caso en que el estado no sea 1 (puede ser un error)
                                 Toast.makeText(MenuActivity.this, "Error al obtener los libros.", Toast.LENGTH_SHORT).show();
