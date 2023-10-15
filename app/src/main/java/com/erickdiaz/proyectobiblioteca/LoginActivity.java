@@ -42,32 +42,28 @@ public class LoginActivity extends AppCompatActivity {
         final String username = editTextUsername.getText().toString();
         final String password = editTextPassword.getText().toString();
 
+        // Realizar una solicitud POST al servidor
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (!response.isEmpty()) {
-                            try {
-                                JSONObject jsonResponse = new JSONObject(response);
-                                boolean success = jsonResponse.getBoolean("success");
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
 
-                                if (success) {
-                                    // Autenticación exitosa, redirige al menú
-                                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    // Autenticación fallida, muestra un mensaje de error
-                                    String message = jsonResponse.getString("message");
-                                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                // Error al analizar la respuesta JSON
-                                Toast.makeText(LoginActivity.this, "Error al analizar la respuesta del servidor", Toast.LENGTH_SHORT).show();
+                            if (success) {
+                                // Autenticación exitosa, redirige al menú
+                                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // Autenticación fallida, muestra un mensaje de error
+                                String message = jsonResponse.getString("message");
+                                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            // Respuesta vacía o no válida
-                            Toast.makeText(LoginActivity.this, "Respuesta vacía o no válida del servidor", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            // Error al analizar la respuesta JSON
+                            Toast.makeText(LoginActivity.this, "Error al analizar la respuesta del servidor", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -78,6 +74,14 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Error de red: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // Enviar datos POST al servidor
+                Map<String, String> params = new HashMap<>();
+                params.put("loginUsername", username);
+                params.put("loginPassword", password);
+                return params;
+            }
         };
 
         // Agrega la solicitud a la cola de solicitudes
