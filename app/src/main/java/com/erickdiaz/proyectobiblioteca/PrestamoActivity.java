@@ -9,18 +9,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import android.util.Log;
+
+import java.util.List;
 
 public class PrestamoActivity extends AppCompatActivity {
     private Spinner spinnerLibros;
@@ -99,18 +97,5 @@ public class PrestamoActivity extends AppCompatActivity {
         });
     }
 
-    private static class BookSpinnerAdapter extends ArrayAdapter<Book> {
-        public BookSpinnerAdapter(Context context, List<Book> books) {
-            super(context, android.R.layout.simple_spinner_item, books);
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        }
 
-        @Override
-        public View getView(int position, View convertView, android.view.ViewGroup parent) {
-            View view = super.getView(position, convertView, parent);
-            TextView textView = (TextView) view;
-            textView.setText(getItem(position).getTitle());
-            return view;
-        }
-    }
 }
