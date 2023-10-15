@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/ImageView"
         android:layout_width="208dp"
-        android:layout_height="235dp"
+        android:layout_height="135dp"
         android:layout_marginTop="48dp"
         android:contentDescription="@string/aqui_va_la_imagen"
         android:src="@drawable/image1"
