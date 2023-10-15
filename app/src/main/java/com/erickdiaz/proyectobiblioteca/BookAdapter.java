@@ -1,6 +1,7 @@
 package com.erickdiaz.proyectobiblioteca;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide; // Asegúrate de tener la importación de Glide
+import com.bumptech.glide.Glide;
 import java.util.List;
+import android.view.View;
+import android.widget.Button;
+
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> books;
@@ -40,6 +44,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Glide.with(context)
                 .load(book.getCoverImageUrl())
                 .into(holder.coverImageView);
+
+        holder.btnReservar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Abre la actividad de solicitud de préstamo
+                Intent intent = new Intent(context, PrestamoActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     @Override
@@ -54,6 +72,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         public TextView availabilityTextView;
         public ImageView coverImageView; // Agrega una referencia al ImageView
 
+        public Button btnReservar;
+
         public BookViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
@@ -63,6 +83,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             coverImageView = itemView.findViewById(R.id.bookCover);
 
             // Agrega referencias a otros elementos de book_item.xml aquí
+
+            btnReservar = itemView.findViewById(R.id.btnReservar);
+
         }
     }
 }

@@ -48,6 +48,7 @@ dependencies {
 
 
     implementation ("org.json:json:20210307")
+    implementation ("androidx.appcompat:appcompat:1.3.1")
 
     implementation ("com.android.volley:volley:1.2.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

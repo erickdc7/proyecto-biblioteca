@@ -52,13 +52,14 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/reserveButton"
+            android:id="@+id/btnReservar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="ir"
-            android:text="Reservar"
-            android:textColor="#FFFFFF"
+            android:layout_marginTop="16dp"
             android:background="#007ACC"
-            android:layout_marginTop="16dp" />
+            android:onClick="reservarLibro"
+            android:text="Reservar"
+            android:textColor="#FFFFFF" />
+
     </LinearLayout>
 </LinearLayout>
