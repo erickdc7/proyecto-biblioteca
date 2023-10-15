@@ -64,4 +64,9 @@ public class Book {
     public void setCoverImageUrl(String coverImageUrl) {
         this.coverImageUrl = coverImageUrl;
     }
+
+    @Override
+    public String toString() {
+        return title; // Devuelve el título del libro como representación de cadena
+    }
 }
