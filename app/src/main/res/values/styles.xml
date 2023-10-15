@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Define los atributos y colores de tu tema principal aquí -->
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <!-- Define los atributos específicos de AppTheme.PopupOverlay aquí, si es necesario -->
+    </style>
+
+</resources>

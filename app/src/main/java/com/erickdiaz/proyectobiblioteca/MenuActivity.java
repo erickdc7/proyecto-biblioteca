@@ -1,11 +1,11 @@
 package com.erickdiaz.proyectobiblioteca;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
@@ -14,9 +14,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +32,20 @@ public class MenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookAdapter bookAdapter;
 
+    private DrawerLayout drawerLayout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+
+        requestQueue = Volley.newRequestQueue(this);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Realizar una solicitud GET a la API para cargar la lista de libros, similar a tu código anterior
+
 
         requestQueue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recyclerView);
@@ -55,13 +72,13 @@ public class MenuActivity extends AppCompatActivity {
                                     String author = bookJson.getString("autor");
                                     String category = bookJson.getString("categoria");
                                     int availability = bookJson.getInt("disponibilidad");
-                                    String coverImageUrl = bookJson.getString("coverImageUrl"); // Obtén la URL de la portada aquí
+                                    String coverImageUrl = bookJson.getString("coverImageUrl");
 
                                     Book book = new Book(id, title, author, category, availability, coverImageUrl);
                                     books.add(book);
                                 }
 
-                                bookAdapter = new BookAdapter(MenuActivity.this,books);
+                                bookAdapter = new BookAdapter(MenuActivity.this, books);
                                 recyclerView.setAdapter(bookAdapter);
                             } else {
                                 // Manejar el caso en que el estado no sea 1 (puede ser un error)
@@ -95,4 +112,11 @@ public class MenuActivity extends AppCompatActivity {
         Intent reg = new Intent(this, UsuarioActivity.class);
         startActivity(reg);
     }
+    // Agrega un método para abrir el menú de opciones desde el encabezado
+
+    public void abrirMenu(View v) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
 }

@@ -7,20 +7,17 @@
     android:orientation="vertical"
     tools:context=".MenuActivity">
 
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/logo"
-        android:src="@drawable/logoutp" />
+    <!-- Toolbar (encabezado) -->
+    <androidx.appcompat.widget.Toolbar
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:onClick="irLogin"
-        android:text="@string/comenzar"
-        app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -29,6 +26,5 @@
         android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/book_item" />
-
 
 </LinearLayout>
