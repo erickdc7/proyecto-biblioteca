@@ -9,11 +9,11 @@
         android:id="@+id/ImageView"
         android:layout_width="208dp"
         android:layout_height="135dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/aqui_va_la_imagen"
         android:src="@drawable/logoutp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.638"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -22,48 +22,48 @@
         android:id="@+id/editTextUsername"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/ingrese_usuario"
         android:inputType="text"
         android:textColorHint="#8D6E63"
         app:layout_constraintTop_toBottomOf="@+id/ImageView"
         tools:ignore="Autofill,MissingConstraints,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="55dp" />
+        tools:layout_editor_absoluteX="76dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
         android:textColorHint="#8D6E63"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
         tools:ignore="Autofill,MissingConstraints"
-        tools:layout_editor_absoluteX="55dp" />
+        tools:layout_editor_absoluteX="76dp" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:onClick="iniciarSesion"
         android:text="@string/ingresar"
         android:textSize="16dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="55dp" />
+        tools:layout_editor_absoluteX="76dp" />
 
     <Button
         android:id="@+id/CrearUsuario"
         android:layout_width="250dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:onClick="RegistrarUsu"
         android:text="@string/registrar"
         android:textSize="16dp"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        tools:layout_editor_absoluteX="55dp" />
+        tools:layout_editor_absoluteX="76dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

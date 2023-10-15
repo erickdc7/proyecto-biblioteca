@@ -19,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
 
 public class PrestamoActivity extends AppCompatActivity {
     private Spinner spinnerLibros;
@@ -83,21 +84,20 @@ public class PrestamoActivity extends AppCompatActivity {
         });
 
         // Agregar listeners a los botones
-        Button buttonSolicitarPrestamo = findViewById(R.id.button5);
+        Button buttonSolicitarPrestamo = findViewById(R.id.buttonSolicitarPrestamo);
+
         buttonSolicitarPrestamo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Realiza la lógica de solicitud de préstamo aquí
-                String libroSeleccionado = spinnerLibros.getSelectedItem().toString();
-                String fechaPrestamo = editTextFechaPrestamo.getText().toString();
-                String fechaDevolucion = editTextFechaDevolucion.getText().toString();
+            public void onClick(View v) {
+                // Mostrar un mensaje de solicitud exitosa (puedes usar un Toast)
+                Toast.makeText(PrestamoActivity.this, "Solicitud Exitosa", Toast.LENGTH_SHORT).show();
 
-                // Realiza la lógica para enviar la solicitud de préstamo al servidor
-
-                // Por ahora, muestra un mensaje de éxito
-                Toast.makeText(PrestamoActivity.this, "Solicitud de préstamo enviada.", Toast.LENGTH_SHORT).show();
+                // Redirigir al usuario a la pantalla de menú
+                Intent intent = new Intent(PrestamoActivity.this, MenuActivity.class);
+                startActivity(intent);
             }
         });
+
 
         Button buttonRegresarMenu = findViewById(R.id.button6);
         buttonRegresarMenu.setOnClickListener(new View.OnClickListener() {
