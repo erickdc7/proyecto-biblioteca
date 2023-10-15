@@ -11,7 +11,7 @@
         android:layout_height="135dp"
         android:layout_marginTop="48dp"
         android:contentDescription="@string/aqui_va_la_imagen"
-        android:src="@drawable/image1"
+        android:src="@drawable/logoutp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
