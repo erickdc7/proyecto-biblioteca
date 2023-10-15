@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/ImageView"
@@ -20,49 +20,50 @@
 
     <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="@string/ingrese_usuario"
         android:inputType="text"
         android:textColorHint="#8D6E63"
         app:layout_constraintTop_toBottomOf="@+id/ImageView"
         tools:ignore="Autofill,MissingConstraints,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="30dp" />
+        tools:layout_editor_absoluteX="55dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="350dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="30dp"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
         android:textColorHint="#8D6E63"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
-        tools:layout_editor_absoluteX="30dp"
-        tools:ignore="Autofill,MissingConstraints" />
+        tools:ignore="Autofill,MissingConstraints"
+        tools:layout_editor_absoluteX="55dp" />
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="120dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="50dp"
         android:onClick="iniciarSesion"
         android:text="@string/ingresar"
+        android:textSize="16dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="66dp" />
+        tools:layout_editor_absoluteX="55dp" />
 
     <Button
         android:id="@+id/CrearUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="0dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:onClick="RegistrarUsu"
         android:text="@string/registrar"
-        app:layout_constraintStart_toEndOf="@+id/buttonLogin"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+        tools:layout_editor_absoluteX="55dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
