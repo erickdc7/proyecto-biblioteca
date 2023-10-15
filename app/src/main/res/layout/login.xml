@@ -7,14 +7,15 @@
 
     <ImageView
         android:id="@+id/ImageView"
-        android:src="@drawable/logoutp"
-        android:layout_width="210dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="208dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="48dp"
+        android:contentDescription="@string/aqui_va_la_imagen"
+        android:src="@drawable/image1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/aqui_va_la_imagen"
         tools:ignore="MissingConstraints" />
 
     <EditText
