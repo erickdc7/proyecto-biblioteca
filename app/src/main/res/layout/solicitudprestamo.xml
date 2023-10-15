@@ -42,9 +42,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="50dp"
         android:layout_marginBottom="16dp"
+        android:textColor="#000000"
+        style="@style/Widget.AppCompat.Spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
 
 
     <TextView

@@ -1,14 +1,16 @@
 package com.erickdiaz.proyectobiblioteca;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -24,7 +26,6 @@ public class PrestamoActivity extends AppCompatActivity {
     private Spinner spinnerLibros;
     private EditText editTextFechaPrestamo;
     private EditText editTextFechaDevolucion;
-    private List<Book> libros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class PrestamoActivity extends AppCompatActivity {
         Call<List<Book>> call = bookService.getBooks();
         call.enqueue(new Callback<List<Book>>() {
             @Override
-            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+            public void onResponse(@NonNull Call<List<Book>> call, @NonNull Response<List<Book>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Book> books = response.body();
 
@@ -54,31 +55,24 @@ public class PrestamoActivity extends AppCompatActivity {
                     if (books != null) {
                         Log.d("Retrofit", "Libros obtenidos: " + books.size());
 
-                        // Crea un adaptador para el Spinner
-                        ArrayAdapter<Book> adapter = new ArrayAdapter<>(PrestamoActivity.this, android.R.layout.simple_spinner_item, books);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinnerLibros.setAdapter(adapter);
-                        // Configura el adaptador para el Spinner
+                        // Crea un adaptador personalizado para el Spinner
+                        BookSpinnerAdapter adapter = new BookSpinnerAdapter(PrestamoActivity.this, books);
                         spinnerLibros.setAdapter(adapter);
                     } else {
-                        // Manejar el caso en el que la lista de libros es nula
+                        Toast.makeText(PrestamoActivity.this, "Error en la respuesta", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(PrestamoActivity.this, "Error en la respuesta", Toast.LENGTH_SHORT).show();
                 }
             }
 
-
             @Override
-            public void onFailure(Call<List<Book>> call, Throwable t) {
-                Log.e("Retrofit", "Error en la solicitud: " + t.getMessage());
-                t.printStackTrace();
-                // Handle errors
+            public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
                 Toast.makeText(PrestamoActivity.this, "Error en la solicitud", Toast.LENGTH_SHORT).show();
-
             }
         });
 
+        // Agregar listeners a los botones
         Button buttonSolicitarPrestamo = findViewById(R.id.button5);
         buttonSolicitarPrestamo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,5 +97,20 @@ public class PrestamoActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private static class BookSpinnerAdapter extends ArrayAdapter<Book> {
+        public BookSpinnerAdapter(Context context, List<Book> books) {
+            super(context, android.R.layout.simple_spinner_item, books);
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+
+        @Override
+        public View getView(int position, View convertView, android.view.ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView textView = (TextView) view;
+            textView.setText(getItem(position).getTitle());
+            return view;
+        }
     }
 }
