@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,10 +12,8 @@
         android:contentDescription="@string/aqui_va_la_imagen"
         android:src="@drawable/logoutp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.638"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -27,9 +24,9 @@
         android:hint="@string/ingrese_usuario"
         android:inputType="text"
         android:textColorHint="#8D6E63"
-        app:layout_constraintTop_toBottomOf="@+id/ImageView"
-        tools:ignore="Autofill,MissingConstraints,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteX="76dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImageView" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -39,9 +36,9 @@
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
         android:textColorHint="#8D6E63"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
-        tools:ignore="Autofill,MissingConstraints"
-        tools:layout_editor_absoluteX="76dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -51,9 +48,9 @@
         android:onClick="iniciarSesion"
         android:text="@string/ingresar"
         android:textSize="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="76dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
         android:id="@+id/CrearUsuario"
@@ -63,7 +60,7 @@
         android:onClick="RegistrarUsu"
         android:text="@string/registrar"
         android:textSize="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
-        tools:layout_editor_absoluteX="76dp" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
