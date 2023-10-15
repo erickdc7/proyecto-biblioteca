@@ -2,7 +2,7 @@
     <string name="app_name">BibliotecaUTP</string>
     <string name="registro_de_devolucion">Registro de Devolucion</string>
     <string name="usuario">Usuario</string>
-    <string name="ingrese_usuario">Ingrese Usuario</string>
+    <string name="ingrese_usuario">Ingrese usuario</string>
     <string name="nombre_del_libro">Nombre del Libro</string>
     <string name="ingrese_libro">Ingrese Libro</string>
     <string name="fecha_de_prestamo">Fecha de Prestamo</string>
@@ -30,7 +30,7 @@
     <string name="tel_fono">Teléfono</string>
     <string name="correo_electr_nico">Correo Electrónico</string>
     <string name="repetir_contrase_a">Repetir Contraseña</string>
-    <string name="registrar">Registrar</string>
+    <string name="registrar">Registrarme</string>
     <string name="direccion">Direccion</string>
     <string name="telefono">Telefono</string>
     <string name="correo">Correo</string>
