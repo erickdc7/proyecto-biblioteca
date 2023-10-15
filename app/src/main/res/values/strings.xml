@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">BibliotecaUTP</string>
-    <string name="registro_de_devolucion">Registro de Devolucion</string>
+    <string name="registro_de_devolucion">Registro de Devolución</string>
     <string name="usuario">Usuario</string>
     <string name="ingrese_usuario">Ingrese usuario</string>
     <string name="nombre_del_libro">Nombre del Libro</string>
     <string name="ingrese_libro">Ingrese Libro</string>
-    <string name="fecha_de_prestamo">Fecha de Prestamo</string>
-    <string name="fecha_de_devolucion">Fecha de Devolucion</string>
-    <string name="confirmar_devolucion">Confirmar Devolucion</string>
-    <string name="regresar_al_menu">Regresar al Menu</string>
-    <string name="bienvenido_a_la_biblioteca">Bienvenido a la biblioteca</string>
+    <string name="fecha_de_prestamo">Fecha de Préstamo</string>
+    <string name="fecha_de_devolucion">Fecha de Devolución</string>
+    <string name="confirmar_devolucion">Confirmar Devolución</string>
+    <string name="regresar_al_menu">Regresar al Menú</string>
+    <string name="bienvenido_a_la_biblioteca">Bienvenido a la Biblioteca</string>
     <string name="logo">Logo</string>
     <string name="comenzar">Comenzar</string>
     <string name="aqui_va_la_imagen">aqui_va_la_imagen</string>
@@ -31,8 +31,8 @@
     <string name="correo_electr_nico">Correo Electrónico</string>
     <string name="repetir_contrase_a">Repetir Contraseña</string>
     <string name="registrar">Registrarme</string>
-    <string name="direccion">Direccion</string>
-    <string name="telefono">Telefono</string>
+    <string name="direccion">Dirección</string>
+    <string name="telefono">Teléfono</string>
     <string name="correo">Correo</string>
 
 </resources>
