@@ -8,5 +8,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <!-- Define los atributos específicos de AppTheme.PopupOverlay aquí, si es necesario -->
     </style>
+    <!-- styles.xml -->
+    <style name="SpinnerTheme" parent="Widget.AppCompat.Spinner">
+        <!-- Otros atributos de estilo si es necesario -->
+    </style>
 
 </resources>

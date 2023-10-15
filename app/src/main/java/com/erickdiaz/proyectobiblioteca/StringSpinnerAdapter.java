@@ -7,9 +7,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.List;
 
-public class BookSpinnerAdapter extends ArrayAdapter<Book> {
-    public BookSpinnerAdapter(Context context, List<Book> books) {
-        super(context, android.R.layout.simple_spinner_item, books);
+public class StringSpinnerAdapter extends ArrayAdapter<String> {
+    public StringSpinnerAdapter(Context context, List<String> strings) {
+        super(context, android.R.layout.simple_spinner_item, strings);
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
@@ -17,7 +17,12 @@ public class BookSpinnerAdapter extends ArrayAdapter<Book> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
         TextView textView = (TextView) view;
-        textView.setText(getItem(position).getTitle());
+        String item = getItem(position);
+        if (item != null) {
+            textView.setText(item);
+        } else {
+            textView.setText(""); // Evita un elemento nulo en el adaptador
+        }
         return view;
     }
 }

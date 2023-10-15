@@ -17,7 +17,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import android.util.Log;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrestamoActivity extends AppCompatActivity {
@@ -31,8 +31,6 @@ public class PrestamoActivity extends AppCompatActivity {
         setContentView(R.layout.solicitudprestamo);
 
         spinnerLibros = findViewById(R.id.spinnerLibros);
-        editTextFechaPrestamo = findViewById(R.id.editTextText12);
-        editTextFechaDevolucion = findViewById(R.id.editTextText13);
 
         // Configura Retrofit para obtener la lista de libros
         Retrofit retrofit = new Retrofit.Builder()
@@ -49,23 +47,37 @@ public class PrestamoActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Book> books = response.body();
 
-                    // Verificar si la lista de libros no es nula antes de obtener su tamaño
-                    if (books != null) {
-                        Log.d("Retrofit", "Libros obtenidos: " + books.size());
+                    if (books != null && !books.isEmpty()) {
+                        Log.d("Retrofit", "Títulos de libros obtenidos: " + books.size());
+
+                        // Obtén los títulos de los libros desde la respuesta del servicio web
+                        List<String> bookTitles = new ArrayList<>();
+                        for (Book book : books) {
+                            String title = book.getTitle();
+                            if (title != null) {
+                                bookTitles.add(title);
+                            }
+                        }
 
                         // Crea un adaptador personalizado para el Spinner
-                        BookSpinnerAdapter adapter = new BookSpinnerAdapter(PrestamoActivity.this, books);
+                        StringSpinnerAdapter adapter = new StringSpinnerAdapter(PrestamoActivity.this, bookTitles);
                         spinnerLibros.setAdapter(adapter);
+
+                        for (int i = 0; i < adapter.getCount(); i++) {
+                            Log.d("SpinnerItem", adapter.getItem(i));
+                        }
                     } else {
-                        Toast.makeText(PrestamoActivity.this, "Error en la respuesta", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PrestamoActivity.this, "La lista de títulos de libros está vacía o es nula", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(PrestamoActivity.this, "Error en la respuesta", Toast.LENGTH_SHORT).show();
                 }
             }
 
+
             @Override
             public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
+                Log.e("Retrofit", "Error en la solicitud", t);
                 Toast.makeText(PrestamoActivity.this, "Error en la solicitud", Toast.LENGTH_SHORT).show();
             }
         });
@@ -96,6 +108,5 @@ public class PrestamoActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
+
