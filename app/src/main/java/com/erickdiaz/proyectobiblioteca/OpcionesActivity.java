@@ -52,7 +52,7 @@ public class OpcionesActivity extends AppCompatActivity implements NavigationVie
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DevolucionFragment()).commit();
         }
         else if (item.getItemId() == R.id.nav_prestamo) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrestamoActivity()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrestamoFragment()).commit();
         }
         else {
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();

@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn = "navigation_view">
 
     <group
         android:checkableBehavior="single">
@@ -13,17 +14,40 @@
             tools:ignore="HardcodedText" />
 
         <item
-            android:id="@+id/nav_solicitud_devolucion"
-            android:icon="@drawable/libro1"
-            android:title="Solicitud de Devolución"
+            android:id="@+id/nav_devolucion"
+            android:icon="@drawable/nav_devolucion"
+            android:title="Solicitud de Devolucion"
             tools:ignore="HardcodedText" />
 
-    </group>
+        <item
+            android:id="@+id/nav_prestamo"
+            android:icon="@drawable/nav_devolucion"
+            android:title="Solicitud de Prestamo"
+            tools:ignore="HardcodedText" />
 
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/nav_settings"
+            android:title="Settings"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/nav_about"
+            android:title="About Us"
+            tools:ignore="HardcodedText" />
+    </group>
     <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/nav_logout"
-        android:title="Salir"
-        tools:ignore="HardcodedText" />
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/nav_logout"
+                android:title="Logout"
+                tools:ignore="HardcodedText" />
+        </menu>
+
+    </item>
 
 </menu>
