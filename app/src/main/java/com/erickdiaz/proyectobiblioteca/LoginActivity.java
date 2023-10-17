@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (success) {
                                 // Autenticación exitosa, redirige al menú
-                                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, OpcionesActivity.class);
                                 startActivity(intent);
                             } else {
                                 // Autenticación fallida, muestra un mensaje de error
