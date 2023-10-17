@@ -39,12 +39,16 @@
         <activity
             android:name=".MenuActivity"
             android:exported="true" />
+        <activity
+            android:name=".DevolucionActivity"
+            android:exported="true">
 
+        </activity>
         <activity
             android:name=".UsuarioActivity"
             android:exported="true"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".OpcionesActivity"
             android:exported="true">
 
         </activity>

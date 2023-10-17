@@ -47,6 +47,8 @@ dependencies {
 
     implementation ("com.google.code.gson:gson:2.8.8")
 
+    implementation ("androidx.appcompat:appcompat:1.3.1")
+    implementation ("androidx.fragment:fragment:1.4.0")
 
     implementation ("org.json:json:20210307")
     implementation ("androidx.appcompat:appcompat:1.3.1")

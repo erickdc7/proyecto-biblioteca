@@ -13,6 +13,11 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 import android.view.View;
 import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import androidx.fragment.app.FragmentManager;
 
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
@@ -48,12 +53,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.btnReservar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Abre la actividad de solicitud de préstamo
-                Intent intent = new Intent(context, PrestamoActivity.class);
-                context.startActivity(intent);
+                // Verifica que el contexto sea un AppCompatActivity antes de obtener el FragmentManager
+                if (context instanceof AppCompatActivity) {
+                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.fragment_container, new PrestamoFragment());
+                    transaction.addToBackStack(null);  // Opcional: permite volver al fragmento anterior
+                    transaction.commit();
+                }
             }
         });
-
 
 
 

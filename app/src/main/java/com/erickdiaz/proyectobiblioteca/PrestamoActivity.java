@@ -92,21 +92,27 @@ public class PrestamoActivity extends AppCompatActivity {
                 // Mostrar un mensaje de solicitud exitosa (puedes usar un Toast)
                 Toast.makeText(PrestamoActivity.this, "Solicitud Exitosa", Toast.LENGTH_SHORT).show();
 
-                // Redirigir al usuario a la pantalla de menú
-                Intent intent = new Intent(PrestamoActivity.this, MenuActivity.class);
-                startActivity(intent);
+                // Volver al fragmento HomeFragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new HomeFragment()) // Reemplaza R.id.fragment_container con el ID de tu contenedor de fragmentos
+                        .commit();
             }
         });
-
 
         Button buttonRegresarMenu = findViewById(R.id.button6);
         buttonRegresarMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Regresar al menú principal
-                finish();
+            public void onClick(View v) {
+                // Regresar al fragmento HomeFragment
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new HomeFragment()) // Reemplaza R.id.fragment_container con el ID de tu contenedor de fragmentos
+                        .commit();
             }
         });
+
+
+
+
     }
 }
 
