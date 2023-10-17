@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:ignore="ExtraText">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:src="@drawable/bibliotecalogin"
+        android:layout_gravity="center"
+        android:contentDescription="@string/logo" />
+    <TextView
+        android:id="@+id/Bienvenido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/bienvenido_a_la_biblioteca"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/BtonBienve"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/comenzar"
+        android:onClick="irLogin"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
+    />
+
+</LinearLayout>
