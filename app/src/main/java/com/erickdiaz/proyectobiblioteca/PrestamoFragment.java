@@ -8,26 +8,34 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import android.content.Intent;
 import android.content.Context;
+
 import androidx.fragment.app.FragmentTransaction;
+
 import java.text.SimpleDateFormat;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
 public class PrestamoFragment extends Fragment {
     private Spinner spinnerLibros;
     private Context context;
@@ -40,7 +48,6 @@ public class PrestamoFragment extends Fragment {
         Button button6 = rootView.findViewById(R.id.button6);
         TextView editTextFechaPrestamo = rootView.findViewById(R.id.editTextText12);
 
-
         spinnerLibros = rootView.findViewById(R.id.spinnerLibros);
         // Formatea la fecha actual
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -48,7 +55,6 @@ public class PrestamoFragment extends Fragment {
 
         // Establece la fecha en el TextView
         editTextFechaPrestamo.setText(fechaActual);
-
 
         // Configura Retrofit para obtener la lista de libros
         Retrofit retrofit = new Retrofit.Builder()
@@ -113,6 +119,7 @@ public class PrestamoFragment extends Fragment {
                         .commit();
             }
         });
+
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,12 +140,6 @@ public class PrestamoFragment extends Fragment {
             }
         });
 
-
-
         return rootView;
-
     }
-
-
-
 }

@@ -7,18 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+
 import java.util.List;
+
 import android.view.View;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import androidx.fragment.app.FragmentManager;
-
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> books;
@@ -63,10 +66,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 }
             }
         });
-
-
-
-
     }
 
     @Override
@@ -94,7 +93,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             // Agrega referencias a otros elementos de book_item.xml aquí
 
             btnReservar = itemView.findViewById(R.id.btnReservar);
-
         }
     }
 }

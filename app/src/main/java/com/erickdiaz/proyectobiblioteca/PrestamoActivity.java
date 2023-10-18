@@ -9,21 +9,27 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 import android.util.Log;
+
 import java.text.SimpleDateFormat;
+
 import android.view.View;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import android.content.Intent;
 
 public class PrestamoActivity extends AppCompatActivity {
@@ -45,9 +51,6 @@ public class PrestamoActivity extends AppCompatActivity {
 
         // Establece la fecha en el TextView
         editTextFechaPrestamo.setText(fechaActual);
-
-
-
 
         // Configura Retrofit para obtener la lista de libros
         Retrofit retrofit = new Retrofit.Builder()
@@ -91,7 +94,6 @@ public class PrestamoActivity extends AppCompatActivity {
                 }
             }
 
-
             @Override
             public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
                 Log.e("Retrofit", "Error en la solicitud", t);
@@ -125,10 +127,5 @@ public class PrestamoActivity extends AppCompatActivity {
                         .commit();
             }
         });
-
-
-
-
     }
 }
-

@@ -44,20 +44,14 @@ public class OpcionesActivity extends AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.nav_settings) {
+        } else if (item.getItemId() == R.id.nav_settings) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.nav_devolucion) {
+        } else if (item.getItemId() == R.id.nav_devolucion) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DevolucionFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.nav_prestamo) {
+        } else if (item.getItemId() == R.id.nav_prestamo) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrestamoFragment()).commit();
-        }
-        else {
+        } else {
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
-
-
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

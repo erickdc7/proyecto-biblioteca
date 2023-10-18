@@ -54,6 +54,7 @@ public class DevolucionFragment extends Fragment {
                         .commit();
             }
         });
+
         BotonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +77,6 @@ public class DevolucionFragment extends Fragment {
 
         return view;
     }
-
 
     public boolean validar() {
         String c2 = campo2.getText().toString();
