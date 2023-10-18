@@ -17,21 +17,19 @@ import androidx.fragment.app.FragmentTransaction;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class DevolucionFragment extends Fragment {
 
-    EditText campo2,campo3;
+    EditText campo2, campo3;
     private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_devolucion, container, false);
+        View view = inflater.inflate(R.layout.fragment_devolucion, container, false);
 
-
-        campo2=view.findViewById(R.id.editNombreLibro);
-        campo3=view.findViewById(R.id.editFechaDevolucion);
+        campo2 = view.findViewById(R.id.editNombreLibro);
+        campo3 = view.findViewById(R.id.editFechaDevolucion);
         TextView editFechaDevolucion = view.findViewById(R.id.editFechaDevolucion);
         Button Botonconfirm = view.findViewById(R.id.Botonconfirm);
         TextView BotonRegresar = view.findViewById(R.id.BotonRegresar);
@@ -80,23 +78,22 @@ public class DevolucionFragment extends Fragment {
     }
 
 
-
-    public boolean validar(){
-        String c2=campo2.getText().toString();
-        String c3=campo3.getText().toString();
-        if(c2.isEmpty()){
+    public boolean validar() {
+        String c2 = campo2.getText().toString();
+        String c3 = campo3.getText().toString();
+        if (c2.isEmpty()) {
             campo2.setError("Este campo es obligatorio");
             return false;
         }
-        if(c3.isEmpty()){
+        if (c3.isEmpty()) {
             campo2.setError("Este campo es obligatorio");
             return false;
         }
         return true;
     }
 
-    public void irMenuPrincipal(View v){
-        Intent intent =new Intent(getActivity(),MenuLateralActivity.class);
+    public void irMenuPrincipal(View v) {
+        Intent intent = new Intent(getActivity(), MenuLateralActivity.class);
         startActivity(intent);
     }
 

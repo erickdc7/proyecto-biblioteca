@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:ignore="ExtraText">
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="120dp"
-        android:src="@drawable/bibliotecalogin"
         android:layout_gravity="center"
-        android:contentDescription="@string/logo" />
+        android:contentDescription="@string/logo"
+        android:src="@drawable/bibliotecalogin" />
+
     <TextView
         android:id="@+id/Bienvenido"
         android:layout_width="wrap_content"
@@ -22,13 +23,14 @@
         android:text="@string/bienvenido_a_la_biblioteca"
         android:textSize="30sp"
         android:textStyle="bold" />
+
     <Button
         android:id="@+id/BtonBienve"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/comenzar"
-        android:onClick="irLogin"
         android:layout_marginTop="40dp"
+        android:onClick="irLogin"
+        android:text="@string/comenzar"
         app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
     />
 

@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 public class PrestamoFragment extends Fragment {
-
     private Spinner spinnerLibros;
     private Context context;
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,8 +17,8 @@
             android:layout_height="120dp"
             android:layout_marginTop="16dp"
             android:contentDescription="aqui_va_la_imagen"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/libro1"
             tools:ignore="HardcodedText" />
@@ -33,9 +32,9 @@
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/ImageView"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ImageView"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp" />
 
@@ -43,18 +42,17 @@
             android:id="@+id/NombreLibro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/nombre_del_libro"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/labelRegistro"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/labelRegistro" />
 
         <EditText
             android:id="@+id/editNombreLibro"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/NombreLibro"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:contentDescription="@string/ingrese_libro"
@@ -62,24 +60,24 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NombreLibro"
             tools:ignore="Autofill,EditableContentDescCheck,LabelFor,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/FechaPrestamo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/fecha_de_prestamo"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/editNombreLibro"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editNombreLibro" />
 
         <EditText
             android:id="@+id/editFechaPrestamo"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/FechaPrestamo"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:contentDescription="Ingrese FechaP"
@@ -87,24 +85,24 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FechaPrestamo"
             tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/FechaDevolucion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/fecha_de_devolucion"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/editFechaPrestamo"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editFechaPrestamo" />
 
         <EditText
             android:id="@+id/editFechaDevolucion"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/FechaDevolucion"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:contentDescription="Ingrese FechaD"
@@ -112,6 +110,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FechaDevolucion"
             tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
         <Button

@@ -12,8 +12,7 @@ public class MenuLateralActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menuprincipal);
-
-}
+    }
 
     public void irMenuLateral(View v) {
         Intent reg = new Intent(this, OpcionesActivity.class);

@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="160dp"
+    android:background="?attr/colorPrimaryDark"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?attr/colorPrimaryDark">
+    android:padding="16dp">
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="64dp"
-        android:src="@drawable/logoutp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/logoutp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="8dp"
         android:text="BIBLIOTECA UTP"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp" />
+        android:textSize="18sp" />
 
 </LinearLayout>

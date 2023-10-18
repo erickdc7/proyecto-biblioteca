@@ -16,7 +16,6 @@
         android:background="@color/white"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
