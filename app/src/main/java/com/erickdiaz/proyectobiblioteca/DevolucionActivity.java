@@ -13,12 +13,11 @@ import java.util.Date;
 
 public class DevolucionActivity extends AppCompatActivity {
 
-    EditText campo1,campo2,campo3;
+    EditText campo2,campo3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.solicituddevolucion);
-        campo1=(EditText)findViewById(R.id.editUsuario);
         campo2=(EditText)findViewById(R.id.editNombreLibro);
         campo3=(EditText)findViewById(R.id.editFechaDevolucion);
         TextView editFechaDevolucion = findViewById(R.id.editFechaDevolucion);
@@ -39,13 +38,9 @@ public class DevolucionActivity extends AppCompatActivity {
     }
 
     public boolean validar(){
-        String c1=campo1.getText().toString();
         String c2=campo2.getText().toString();
         String c3=campo3.getText().toString();
-        if(c1.isEmpty()){
-            campo1.setError("Este campo es obligatorio");
-            return false;
-        }
+
         if(c2.isEmpty()){
             campo2.setError("Este campo es obligatorio");
             return false;

@@ -18,61 +18,37 @@
             android:layout_height="120dp"
             android:layout_marginTop="16dp"
             android:contentDescription="aqui_va_la_imagen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/libro1"
             tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/labelRegistro"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/registro_de_devolucion"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/ImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:id="@+id/labelUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/usuario"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/labelRegistro"
-            tools:layout_editor_absoluteX="31dp" />
-
-        <EditText
-            android:id="@+id/editUsuario"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/labelUsuario"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:contentDescription="@string/ingrese_usuario"
-            android:ems="10"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            tools:ignore="Autofill,EditableContentDescCheck,LabelFor,TouchTargetSizeCheck" />
-
-        <TextView
             android:id="@+id/NombreLibro"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/nombre_del_libro"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/editUsuario"
-            android:layout_marginTop="20dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/labelRegistro"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/editNombreLibro"
@@ -86,18 +62,19 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="Autofill,EditableContentDescCheck,LabelFor,TouchTargetSizeCheck"
-            />
+            tools:ignore="Autofill,EditableContentDescCheck,LabelFor,TouchTargetSizeCheck" />
+
         <TextView
             android:id="@+id/FechaPrestamo"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/fecha_de_prestamo"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/editNombreLibro"
             android:layout_marginTop="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
+
         <EditText
             android:id="@+id/editFechaPrestamo"
             android:layout_width="350dp"
@@ -110,18 +87,19 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck"
-            />
+            tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+
         <TextView
             android:id="@+id/FechaDevolucion"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/fecha_de_devolucion"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/editFechaPrestamo"
             android:layout_marginTop="20dp"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
+
         <EditText
             android:id="@+id/editFechaDevolucion"
             android:layout_width="350dp"
@@ -134,8 +112,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck"
-            />
+            tools:ignore="Autofill,EditableContentDescCheck,HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/Botonconfirm"
@@ -143,8 +120,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:text="@string/confirmar_devolucion"
-            android:onClick="agregar"
-            app:layout_constraintStart_toStartOf="@+id/editFechaDevolucion"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editFechaDevolucion" />
 
         <Button
@@ -154,7 +130,6 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="16dp"
             android:text="@string/regresar_al_menu"
-            android:onClick="irMenuPrincipal"
             app:layout_constraintStart_toEndOf="@+id/Botonconfirm"
             app:layout_constraintTop_toBottomOf="@+id/editFechaDevolucion" />
 

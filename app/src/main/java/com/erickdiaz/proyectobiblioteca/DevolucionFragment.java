@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class DevolucionFragment extends Fragment {
 
-    EditText campo1,campo2,campo3;
+    EditText campo2,campo3;
     private Context context;
 
     @Override
@@ -29,15 +29,16 @@ public class DevolucionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_devolucion, container, false);
 
-        campo1=view.findViewById(R.id.editUsuario);
+
         campo2=view.findViewById(R.id.editNombreLibro);
         campo3=view.findViewById(R.id.editFechaDevolucion);
         TextView editFechaDevolucion = view.findViewById(R.id.editFechaDevolucion);
-        Button Botonconfirm = view.findViewById(R.id.button6);
-        TextView BotonRegresar = view.findViewById(R.id.editTextText12);
+        Button Botonconfirm = view.findViewById(R.id.Botonconfirm);
+        TextView BotonRegresar = view.findViewById(R.id.BotonRegresar);
         // Formatea la fecha actual
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String fechaActual = dateFormat.format(new Date());
+        context = view.getContext();
 
         // Establece la fecha en el TextView
         editFechaDevolucion.setText(fechaActual);
@@ -46,7 +47,7 @@ public class DevolucionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Mostrar un mensaje de solicitud exitosa (puedes usar un Toast)
-                Toast.makeText(context, "Solicitud Exitosa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Devolucion Exitosa", Toast.LENGTH_SHORT).show();
 
                 // Redirigir al usuario a la pantalla de inicio (HomeFragment)
                 requireActivity().getSupportFragmentManager()
@@ -81,13 +82,8 @@ public class DevolucionFragment extends Fragment {
 
 
     public boolean validar(){
-        String c1=campo1.getText().toString();
         String c2=campo2.getText().toString();
         String c3=campo3.getText().toString();
-        if(c1.isEmpty()){
-            campo1.setError("Este campo es obligatorio");
-            return false;
-        }
         if(c2.isEmpty()){
             campo2.setError("Este campo es obligatorio");
             return false;
