@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@drawable/bibliotecalogin" />
-    <foreground android:drawable="@drawable/bibliotecalogin" />
-    <monochrome android:drawable="@drawable/bibliotecalogin" />
+    <background android:drawable="@drawable/logobiblio" />
+    <foreground android:drawable="@drawable/logobiblio" />
+    <monochrome android:drawable="@drawable/logobiblio" />
 </adaptive-icon>
