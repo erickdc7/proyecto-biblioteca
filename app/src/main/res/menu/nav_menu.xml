@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn = "navigation_view">
+    tools:showIn="navigation_view">
 
-    <group
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/nav_home"
-            android:title="Home"
+            android:title="Inicio"
             tools:ignore="HardcodedText" />
 
         <item
             android:id="@+id/nav_devolucion"
             android:icon="@drawable/nav_devolucion"
-            android:title="Solicitud de Devolucion"
+            android:title="Solicitud de devolución"
             tools:ignore="HardcodedText" />
 
         <item
             android:id="@+id/nav_prestamo"
             android:icon="@drawable/nav_devolucion"
-            android:title="Solicitud de Prestamo"
+            android:title="Solicitud de préstamo"
             tools:ignore="HardcodedText" />
 
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/nav_settings"
-            android:title="Settings"
+            android:title="Configuración"
             tools:ignore="HardcodedText" />
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/nav_about"
-            android:title="About Us"
+            android:title="Nosotros"
             tools:ignore="HardcodedText" />
     </group>
-    <item
-        android:title="">
+    <item android:title="">
 
         <menu>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/nav_logout"
-                android:title="Logout"
+                android:title="Cerrar sesión"
                 tools:ignore="HardcodedText" />
         </menu>
 
