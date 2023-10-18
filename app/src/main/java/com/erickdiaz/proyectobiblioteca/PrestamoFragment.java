@@ -17,10 +17,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import android.util.Log;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import android.content.Intent;
 import android.content.Context;
 import androidx.fragment.app.FragmentTransaction;
+import java.text.SimpleDateFormat;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -37,9 +39,17 @@ public class PrestamoFragment extends Fragment {
         context = rootView.getContext();
         Button buttonSolicitarPrestamo = rootView.findViewById(R.id.buttonSolicitarPrestamo);
         Button button6 = rootView.findViewById(R.id.button6);
+        TextView editTextFechaPrestamo = rootView.findViewById(R.id.editTextText12);
 
 
         spinnerLibros = rootView.findViewById(R.id.spinnerLibros);
+        // Formatea la fecha actual
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String fechaActual = dateFormat.format(new Date());
+
+        // Establece la fecha en el TextView
+        editTextFechaPrestamo.setText(fechaActual);
+
 
         // Configura Retrofit para obtener la lista de libros
         Retrofit retrofit = new Retrofit.Builder()

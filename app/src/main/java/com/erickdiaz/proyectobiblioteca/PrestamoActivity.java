@@ -17,7 +17,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import android.util.Log;
+import java.text.SimpleDateFormat;
+import android.view.View;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import android.content.Intent;
 
@@ -30,8 +35,19 @@ public class PrestamoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.solicitudprestamo);
+        TextView editTextFechaPrestamo = findViewById(R.id.editTextText12);
 
         spinnerLibros = findViewById(R.id.spinnerLibros);
+
+        // Formatea la fecha actual
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String fechaActual = dateFormat.format(new Date());
+
+        // Establece la fecha en el TextView
+        editTextFechaPrestamo.setText(fechaActual);
+
+
+
 
         // Configura Retrofit para obtener la lista de libros
         Retrofit retrofit = new Retrofit.Builder()
