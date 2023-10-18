@@ -42,8 +42,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Book book = books.get(position);
         holder.titleTextView.setText(book.getTitle());
         holder.authorTextView.setText(book.getAuthor());
-        holder.categoryTextView.setText(book.getCategory());
-        holder.availabilityTextView.setText("Availability: " + book.getAvailability());
+        holder.categoryTextView.setText("Genero: " + book.getCategory());
+        holder.availabilityTextView.setText("Disponibilidad: " + book.getAvailability());
 
         // Configura la imagen de la portada del libro usando Glide
         Glide.with(context)
