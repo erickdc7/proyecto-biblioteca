@@ -100,6 +100,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="50dp"
         android:ems="10"
+        android:hint="@string/formato_fecha"
         android:inputType="text"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
