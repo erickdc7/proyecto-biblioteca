@@ -17,11 +17,12 @@
 
     <TextView
         android:id="@+id/Bienvenido"
-        android:layout_width="wrap_content"
+        android:layout_width="283dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/bienvenido_a_la_biblioteca"
-        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textSize="32sp"
         android:textStyle="bold" />
 
     <Button

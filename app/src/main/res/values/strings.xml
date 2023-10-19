@@ -8,9 +8,10 @@
     <string name="fecha_de_prestamo">Fecha de Préstamo</string>
     <string name="formato_fecha">dd-MM-yyyy</string>
     <string name="fecha_de_devolucion">Fecha de Devolución</string>
-    <string name="confirmar_devolucion">Confirmar Devolución</string>
-    <string name="regresar_al_menu">Regresar al Menú</string>
-    <string name="bienvenido_a_la_biblioteca">Bienvenido a la Biblioteca</string>
+    <string name="confirmar_devolucion">Confirmar devolución</string>
+    <string name="solicitar_prestamo">Solicitar préstamo</string>
+    <string name="regresar_al_menu">Regresar al menú</string>
+    <string name="bienvenido_a_la_biblioteca">Bienvenido a la Biblioteca UTP</string>
     <string name="logo">Logo</string>
     <string name="comenzar">Comenzar</string>
     <string name="aqui_va_la_imagen">aqui_va_la_imagen</string>
