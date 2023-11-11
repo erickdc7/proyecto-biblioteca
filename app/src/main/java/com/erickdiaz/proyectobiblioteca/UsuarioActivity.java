@@ -4,22 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.erickdiaz.proyectobiblioteca.LoginActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class UsuarioActivity extends AppCompatActivity {
 
@@ -30,10 +17,15 @@ public class UsuarioActivity extends AppCompatActivity {
     private EditText correoEditText;
     private EditText passwordEditText;
 
+    private DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registrousuario);
+
+        // Inicializar el DatabaseHelper
+        databaseHelper = new DatabaseHelper(this);
 
         usernameEditText = findViewById(R.id.editTextUsername);
         dniEditText = findViewById(R.id.DNI);
@@ -51,48 +43,30 @@ public class UsuarioActivity extends AppCompatActivity {
         final String correo = correoEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
 
-        String url = "https://proleptic-coil.000webhostapp.com/loginusuario.php";
+        // Validación de entrada
+        if (username.isEmpty() || dni.isEmpty() || codigo.isEmpty() || telefono.isEmpty() || correo.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            String message = jsonResponse.getString("message");
+        // Contraseña segura (por ejemplo, al menos 6 caracteres)
+        if (password.length() < 6) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-                            if (success) {
-                                // Registro de usuario exitoso, puedes mostrar un mensaje o redirigir a otra actividad
-                                Intent intent = new Intent(UsuarioActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                            } else {
-                                // Mostrar mensaje de error
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", username);
-                params.put("dni", dni);
-                params.put("Codigo", codigo);
-                params.put("telefono", telefono);
-                params.put("correo", correo);
-                params.put("password", password);
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
+        long result = databaseHelper.addUser(username, dni, codigo, telefono, correo, password);
+
+        if (result != -1) {
+            Toast.makeText(this, "Registro local exitoso", Toast.LENGTH_SHORT).show();
+
+            // Redirige a la actividad de inicio de sesión
+            Intent intent = new Intent(UsuarioActivity.this, LoginActivity.class);
+            startActivity(intent);
+
+            // Puedes redirigir a otra actividad o realizar otras acciones si es necesario
+        } else {
+            Toast.makeText(this, "Error al registrar localmente", Toast.LENGTH_SHORT).show();
+        }
     }
 }
