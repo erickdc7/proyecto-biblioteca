@@ -25,7 +25,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText dniEditText;
-    private EditText direccionEditText;
+    private EditText codigoEditText;
     private EditText telefonoEditText;
     private EditText correoEditText;
     private EditText passwordEditText;
@@ -37,7 +37,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.editTextUsername);
         dniEditText = findViewById(R.id.DNI);
-        direccionEditText = findViewById(R.id.Direccion);
+        codigoEditText = findViewById(R.id.Codigo);
         telefonoEditText = findViewById(R.id.Telefono);
         correoEditText = findViewById(R.id.Correo);
         passwordEditText = findViewById(R.id.editTextPassword);
@@ -46,7 +46,7 @@ public class UsuarioActivity extends AppCompatActivity {
     public void registrarUsuario(View v) {
         final String username = usernameEditText.getText().toString();
         final String dni = dniEditText.getText().toString();
-        final String direccion = direccionEditText.getText().toString();
+        final String codigo = codigoEditText.getText().toString();
         final String telefono = telefonoEditText.getText().toString();
         final String correo = correoEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
@@ -86,7 +86,7 @@ public class UsuarioActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("dni", dni);
-                params.put("direccion", direccion);
+                params.put("Codigo", codigo);
                 params.put("telefono", telefono);
                 params.put("correo", correo);
                 params.put("password", password);
