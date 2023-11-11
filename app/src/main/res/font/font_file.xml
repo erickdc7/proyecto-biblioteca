@@ -1,0 +1,10 @@
+<!-- res/font/font_family.xml -->
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <font
+        android:font="@font/AvenirRegular"
+        android:fontStyle="normal"
+        android:fontWeight="400" />
+
+</font-family>
