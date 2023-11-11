@@ -1,5 +1,6 @@
 package com.erickdiaz.proyectobiblioteca;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -50,12 +51,18 @@ public class OpcionesActivity extends AppCompatActivity implements NavigationVie
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DevolucionFragment()).commit();
         } else if (item.getItemId() == R.id.nav_prestamo) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrestamoFragment()).commit();
-        } else {
-            Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        } else if (item.getItemId() == R.id.nav_logout) {
+            // Agrega código para realizar cualquier acción necesaria antes de cerrar sesión
 
+            // Redirige a la actividad de inicio de sesión (LoginActivity)
+            Toast.makeText(this, "Se cerró sesión exitosamente", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(OpcionesActivity.this, LoginActivity.class);
+            startActivity(intent);
+
+            // Cierra el drawer
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        return true;
     }
 
     @Override
