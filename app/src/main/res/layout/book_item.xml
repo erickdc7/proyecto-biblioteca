@@ -12,6 +12,7 @@
         android:src="@drawable/portada_1984" />
 
     <LinearLayout
+        android:fontFamily=""
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,6 +22,7 @@
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/avenirregular"
             android:layout_height="wrap_content"
             android:text="Sample Title"
             android:textColor="#333333"
@@ -31,6 +33,7 @@
             android:id="@+id/authorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirregular"
             android:text="Sample Author"
             android:textColor="#666666"
             android:textSize="16sp" />
@@ -39,6 +42,7 @@
             android:id="@+id/categoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirregular"
             android:text="Sample Category"
             android:textColor="#666666"
             android:textSize="16sp" />
@@ -47,6 +51,8 @@
             android:id="@+id/availabilityTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/avenirregular"
+
             android:text="Disponiblididad"
             android:textColor="#666666"
             android:textSize="16sp" />
@@ -55,12 +61,12 @@
             android:id="@+id/btnReservar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="reservarLibro"
-            android:padding="10dp"
-            android:radius="50dp"
-            android:text="Reservar"
+            android:layout_marginTop="5dp"
             android:backgroundTint="#b3042b"
+            android:fontFamily="@font/avenirregular"
+            android:onClick="reservarLibro"
+            android:radius="20dp"
+            android:text="Reservar"
             android:textColor="#FFFFFF" />
 
 
