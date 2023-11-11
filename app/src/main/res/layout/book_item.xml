@@ -56,10 +56,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#007ACC"
             android:onClick="reservarLibro"
+            android:padding="10dp"
+            android:radius="50dp"
             android:text="Reservar"
+            android:backgroundTint="#b3042b"
             android:textColor="#FFFFFF" />
+
 
     </LinearLayout>
 </LinearLayout>
