@@ -28,7 +28,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="ingrese Nombres"
+            android:hint="Ingrese Nombres"
             android:inputType="text"
             android:textColorHint="#8D6E63"
             app:layout_constraintTop_toBottomOf="@+id/ImageView"

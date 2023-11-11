@@ -2,6 +2,7 @@ package com.erickdiaz.proyectobiblioteca;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,6 +53,22 @@ public class UsuarioActivity extends AppCompatActivity {
         // Contraseña segura (por ejemplo, al menos 6 caracteres)
         if (password.length() < 6) {
             Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validaciones específicas
+        if (dni.length() != 8 || !TextUtils.isDigitsOnly(dni)) {
+            Toast.makeText(this, "El DNI debe tener 7 dígitos y ser numérico", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (codigo.length() > 0 && (codigo.charAt(0) != 'u' || codigo.length() > 9 || !TextUtils.isDigitsOnly(codigo.substring(1)))) {
+            Toast.makeText(this, "El código debe empezar con 'u' y tener máximo 9 dígitos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (telefono.length() > 9 || !TextUtils.isDigitsOnly(telefono)) {
+            Toast.makeText(this, "El teléfono debe tener máximo 9 dígitos y ser numérico", Toast.LENGTH_SHORT).show();
             return;
         }
 
