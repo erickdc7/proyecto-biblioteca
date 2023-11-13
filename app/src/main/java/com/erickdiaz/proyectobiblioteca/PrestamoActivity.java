@@ -1,17 +1,25 @@
 package com.erickdiaz.proyectobiblioteca;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,38 +27,23 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import android.util.Log;
-
-import java.text.SimpleDateFormat;
-
-import android.view.View;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import android.content.Intent;
-
 public class PrestamoActivity extends AppCompatActivity {
+
     private Spinner spinnerLibros;
     private EditText editTextFechaPrestamo;
-    private EditText editTextFechaDevolucion;
+    private RadioGroup radioGroupDias;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.solicitudprestamo);
-        TextView editTextFechaPrestamo = findViewById(R.id.editTextText12);
+
+        dbHelper = new DBHelper(this);
 
         spinnerLibros = findViewById(R.id.spinnerLibros);
-
-        // Formatea la fecha actual
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String fechaActual = dateFormat.format(new Date());
-
-        // Establece la fecha en el TextView
-        editTextFechaPrestamo.setText(fechaActual);
+        editTextFechaPrestamo = findViewById(R.id.editTextText12);
+        radioGroupDias = findViewById(R.id.radioGroupDias);
 
         // Configura Retrofit para obtener la lista de libros
         Retrofit retrofit = new Retrofit.Builder()
@@ -68,8 +61,6 @@ public class PrestamoActivity extends AppCompatActivity {
                     List<Book> books = response.body();
 
                     if (books != null && !books.isEmpty()) {
-                        Log.d("Retrofit", "Títulos de libros obtenidos: " + books.size());
-
                         // Obtén los títulos de los libros desde la respuesta del servicio web
                         List<String> bookTitles = new ArrayList<>();
                         for (Book book : books) {
@@ -82,10 +73,6 @@ public class PrestamoActivity extends AppCompatActivity {
                         // Crea un adaptador personalizado para el Spinner
                         StringSpinnerAdapter adapter = new StringSpinnerAdapter(PrestamoActivity.this, bookTitles);
                         spinnerLibros.setAdapter(adapter);
-
-                        for (int i = 0; i < adapter.getCount(); i++) {
-                            Log.d("SpinnerItem", adapter.getItem(i));
-                        }
                     } else {
                         Toast.makeText(PrestamoActivity.this, "La lista de títulos de libros está vacía o es nula", Toast.LENGTH_SHORT).show();
                     }
@@ -96,24 +83,16 @@ public class PrestamoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
-                Log.e("Retrofit", "Error en la solicitud", t);
                 Toast.makeText(PrestamoActivity.this, "Error en la solicitud", Toast.LENGTH_SHORT).show();
             }
         });
 
         // Agregar listeners a los botones
         Button buttonSolicitarPrestamo = findViewById(R.id.buttonSolicitarPrestamo);
-
         buttonSolicitarPrestamo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Mostrar un mensaje de solicitud exitosa (puedes usar un Toast)
-                Toast.makeText(PrestamoActivity.this, "Solicitud Exitosa", Toast.LENGTH_SHORT).show();
-
-                // Volver al fragmento HomeFragment
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new HomeFragment()) // Reemplaza R.id.fragment_container con el ID de tu contenedor de fragmentos
-                        .commit();
+                solicitarPrestamo();
             }
         });
 
@@ -123,9 +102,55 @@ public class PrestamoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Regresar al fragmento HomeFragment
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new HomeFragment()) // Reemplaza R.id.fragment_container con el ID de tu contenedor de fragmentos
+                        .replace(R.id.fragment_container, new HomeFragment())
                         .commit();
             }
         });
     }
+
+    private void solicitarPrestamo() {
+        String libro = spinnerLibros.getSelectedItem().toString();
+        String fechaPrestamo = editTextFechaPrestamo.getText().toString();
+        RadioButton selectedRadioButton = findViewById(radioGroupDias.getCheckedRadioButtonId());
+        String duracionPrestamo = getDuracionFromRadioButton(selectedRadioButton);
+
+        if (libro.isEmpty() || fechaPrestamo.isEmpty() || duracionPrestamo.isEmpty()) {
+            Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Insertar datos en la base de datos SQLite
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(DBHelper.COLUMN_LIBRO, libro);
+            values.put(DBHelper.COLUMN_FECHA_PRESTAMO, fechaPrestamo);
+            values.put(DBHelper.COLUMN_DURACION, duracionPrestamo);
+
+            long newRowId = db.insert(DBHelper.TABLE_PRESTAMOS, null, values);
+
+            if (newRowId != -1) {
+                Toast.makeText(this, "Préstamo solicitado con éxito", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error al solicitar el préstamo", Toast.LENGTH_SHORT).show();
+            }
+        } catch (SQLException e) {
+            Toast.makeText(this, "Error al acceder a la base de datos", Toast.LENGTH_SHORT).show();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
+    private String getDuracionFromRadioButton(RadioButton radioButton) {
+        if (radioButton == null) {
+            return "";
+        }
+
+        // Obtenemos el texto del botón seleccionado
+        return radioButton.getText().toString();
+    }
+
 }

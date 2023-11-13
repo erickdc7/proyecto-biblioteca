@@ -1,16 +1,29 @@
 package com.erickdiaz.proyectobiblioteca;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,42 +31,29 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import android.content.Intent;
-import android.content.Context;
-
-import androidx.fragment.app.FragmentTransaction;
-
-import java.text.SimpleDateFormat;
-
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
-import androidx.fragment.app.Fragment;
-
 public class PrestamoFragment extends Fragment {
+
     private Spinner spinnerLibros;
+    private EditText editTextFechaPrestamo;
+    private RadioGroup radioGroupDias;
     private Context context;
+    private DBHelper dbHelper;
+    private String fechaActual;
+    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.solicitudprestamo, container, false);
+        rootView = inflater.inflate(R.layout.solicitudprestamo, container, false);
         context = rootView.getContext();
-        Button buttonSolicitarPrestamo = rootView.findViewById(R.id.buttonSolicitarPrestamo);
-        Button button6 = rootView.findViewById(R.id.button6);
-        TextView editTextFechaPrestamo = rootView.findViewById(R.id.editTextText12);
+        dbHelper = new DBHelper(context);
 
         spinnerLibros = rootView.findViewById(R.id.spinnerLibros);
-        // Formatea la fecha actual
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String fechaActual = dateFormat.format(new Date());
+        editTextFechaPrestamo = rootView.findViewById(R.id.editTextText12);
+        radioGroupDias = rootView.findViewById(R.id.radioGroupDias);
 
-        // Establece la fecha en el TextView
+        // Obtener la fecha actual
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        fechaActual = dateFormat.format(new Date());
         editTextFechaPrestamo.setText(fechaActual);
 
         // Configura Retrofit para obtener la lista de libros
@@ -72,8 +72,6 @@ public class PrestamoFragment extends Fragment {
                     List<Book> books = response.body();
 
                     if (books != null && !books.isEmpty()) {
-                        Log.d("Retrofit", "Títulos de libros obtenidos: " + books.size());
-
                         // Obtén los títulos de los libros desde la respuesta del servicio web
                         List<String> bookTitles = new ArrayList<>();
                         for (Book book : books) {
@@ -87,10 +85,6 @@ public class PrestamoFragment extends Fragment {
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, bookTitles);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinnerLibros.setAdapter(adapter);
-
-                        for (int i = 0; i < adapter.getCount(); i++) {
-                            Log.d("SpinnerItem", adapter.getItem(i));
-                        }
                     } else {
                         Toast.makeText(context, "La lista de títulos de libros está vacía o es nula", Toast.LENGTH_SHORT).show();
                     }
@@ -101,45 +95,56 @@ public class PrestamoFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Book>> call, @NonNull Throwable t) {
-                Log.e("Retrofit", "Error en la solicitud", t);
                 Toast.makeText(context, "Error en la solicitud", Toast.LENGTH_SHORT).show();
             }
         });
 
-        buttonSolicitarPrestamo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Mostrar un mensaje de solicitud exitosa (puedes usar un Toast)
-                Toast.makeText(context, "Solicitud Exitosa", Toast.LENGTH_SHORT).show();
-
-                // Redirigir al usuario a la pantalla de inicio (HomeFragment)
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new HomeFragment())
-                        .commit();
-            }
-        });
-
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Crea una instancia del fragmento que deseas mostrar (en este caso, fragment_home)
-                Fragment fragmentHome = new HomeFragment();
-
-                // Crea una transacción de fragmento
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                // Reemplaza el fragmento actual por fragment_home
-                transaction.replace(R.id.fragment_container, fragmentHome);
-
-                // Agrega la transacción a la pila de retroceso (para permitir volver)
-                transaction.addToBackStack(null);
-
-                // Realiza la transacción
-                transaction.commit();
-            }
-        });
+        // Resto del código...
 
         return rootView;
+    }
+
+    private void solicitarPrestamo() {
+        String libro = (spinnerLibros.getSelectedItem() != null) ? spinnerLibros.getSelectedItem().toString() : "";
+        String fechaPrestamo = fechaActual;
+        RadioButton selectedRadioButton = rootView.findViewById(radioGroupDias.getCheckedRadioButtonId());
+        String duracionPrestamo = getDuracionFromRadioButton(selectedRadioButton);
+
+        if (libro.isEmpty() || fechaPrestamo.isEmpty() || duracionPrestamo.isEmpty()) {
+            Toast.makeText(context, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Insertar datos en la base de datos SQLite
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(DBHelper.COLUMN_LIBRO, libro);
+            values.put(DBHelper.COLUMN_FECHA_PRESTAMO, fechaPrestamo);
+            values.put(DBHelper.COLUMN_DURACION, duracionPrestamo);
+
+            long newRowId = db.insert(DBHelper.TABLE_PRESTAMOS, null, values);
+
+            if (newRowId != -1) {
+                Toast.makeText(context, "Préstamo solicitado con éxito", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Error al solicitar el préstamo", Toast.LENGTH_SHORT).show();
+            }
+        } catch (SQLException e) {
+            Toast.makeText(context, "Error al acceder a la base de datos", Toast.LENGTH_SHORT).show();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
+    private String getDuracionFromRadioButton(RadioButton radioButton) {
+        if (radioButton == null) {
+            return "";
+        }
+
+        return radioButton.getText().toString();
     }
 }
