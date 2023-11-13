@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,6 @@ public class PrestamoFragment extends Fragment {
                     List<Book> books = response.body();
 
                     if (books != null && !books.isEmpty()) {
-                        // Obtén los títulos de los libros desde la respuesta del servicio web
                         List<String> bookTitles = new ArrayList<>();
                         for (Book book : books) {
                             String title = book.getTitle();
@@ -81,10 +82,36 @@ public class PrestamoFragment extends Fragment {
                             }
                         }
 
-                        // Crea un adaptador personalizado para el Spinner
                         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, bookTitles);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinnerLibros.setAdapter(adapter);
+
+                        // Agregar listeners a los botones después de configurar el adapter
+                        Button buttonSolicitarPrestamo = rootView.findViewById(R.id.buttonSolicitarPrestamo);
+                        buttonSolicitarPrestamo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                solicitarPrestamo();
+
+                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment_container, new HomeFragment());
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
+                        });
+
+                        Button buttonRegresarMenu = rootView.findViewById(R.id.button6);
+                        buttonRegresarMenu.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // Regresar al fragmento HomeFragment
+                                requireActivity().getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, new HomeFragment())
+                                        .commit();
+                            }
+                        });
                     } else {
                         Toast.makeText(context, "La lista de títulos de libros está vacía o es nula", Toast.LENGTH_SHORT).show();
                     }
@@ -99,16 +126,27 @@ public class PrestamoFragment extends Fragment {
             }
         });
 
-        // Resto del código...
-
         return rootView;
     }
 
     private void solicitarPrestamo() {
-        String libro = (spinnerLibros.getSelectedItem() != null) ? spinnerLibros.getSelectedItem().toString() : "";
+
+        if (rootView == null) {
+            // Manejar la situación cuando rootView es null
+            Toast.makeText(context, "Error: rootView es null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (spinnerLibros.getSelectedItem() == null) {
+            Toast.makeText(context, "No hay libros disponibles", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String libro = spinnerLibros.getSelectedItem().toString();
         String fechaPrestamo = fechaActual;
+
         RadioButton selectedRadioButton = rootView.findViewById(radioGroupDias.getCheckedRadioButtonId());
-        String duracionPrestamo = getDuracionFromRadioButton(selectedRadioButton);
+        String duracionPrestamo = (selectedRadioButton != null) ? selectedRadioButton.getText().toString() : "";
 
         if (libro.isEmpty() || fechaPrestamo.isEmpty() || duracionPrestamo.isEmpty()) {
             Toast.makeText(context, "Completa todos los campos", Toast.LENGTH_SHORT).show();
