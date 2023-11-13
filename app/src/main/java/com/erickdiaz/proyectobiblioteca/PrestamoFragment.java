@@ -1,10 +1,11 @@
 package com.erickdiaz.proyectobiblioteca;
-
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,16 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,12 +40,14 @@ public class PrestamoFragment extends Fragment {
     private DBHelper dbHelper;
     private String fechaActual;
     private View rootView;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.solicitudprestamo, container, false);
         context = rootView.getContext();
         dbHelper = new DBHelper(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         spinnerLibros = rootView.findViewById(R.id.spinnerLibros);
         editTextFechaPrestamo = rootView.findViewById(R.id.editTextText12);
@@ -130,13 +130,6 @@ public class PrestamoFragment extends Fragment {
     }
 
     private void solicitarPrestamo() {
-
-        if (rootView == null) {
-            // Manejar la situación cuando rootView es null
-            Toast.makeText(context, "Error: rootView es null", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         if (spinnerLibros.getSelectedItem() == null) {
             Toast.makeText(context, "No hay libros disponibles", Toast.LENGTH_SHORT).show();
             return;
@@ -165,6 +158,11 @@ public class PrestamoFragment extends Fragment {
             long newRowId = db.insert(DBHelper.TABLE_PRESTAMOS, null, values);
 
             if (newRowId != -1) {
+                // Guarda el último libro prestado en SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(getString(R.string.last_borrowed_book), libro);
+                editor.apply();
+
                 Toast.makeText(context, "Préstamo solicitado con éxito", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "Error al solicitar el préstamo", Toast.LENGTH_SHORT).show();
@@ -176,13 +174,5 @@ public class PrestamoFragment extends Fragment {
                 db.close();
             }
         }
-    }
-
-    private String getDuracionFromRadioButton(RadioButton radioButton) {
-        if (radioButton == null) {
-            return "";
-        }
-
-        return radioButton.getText().toString();
     }
 }

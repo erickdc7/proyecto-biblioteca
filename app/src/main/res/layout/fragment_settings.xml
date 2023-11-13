@@ -1,17 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_settings.xml -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    <FrameLayout
+        android:id="@+id/contenedorFragmentoUltimoLibro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <TextView
+        android:id="@+id/textViewUstedDebe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/settings"
+        android:text="Usted debe:"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewNombreLibro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewUstedDebe"
+        android:layout_marginTop="8dp"
+        android:text="Nombre del libro"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
 
 </RelativeLayout>
