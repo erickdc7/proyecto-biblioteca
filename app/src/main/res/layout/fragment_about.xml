@@ -9,11 +9,11 @@
     tools:ignore="ExtraText">
 
     <ImageView
-        android:layout_width="329dp"
+        android:layout_width="192dp"
         android:layout_height="192dp"
         android:layout_gravity="center"
         android:contentDescription="@string/logo"
-        android:src="@drawable/logoutp" />
+        android:src="@drawable/utp" />
 
     <TextView
         android:id="@+id/Bienvenido"
@@ -33,9 +33,9 @@ De lunes a sábado de 2:00 pm a 10:00 pm
         android:id="@+id/BtonVisitanos"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/avenirregular"
-        android:backgroundTint="#b3042b"
         android:layout_marginTop="40dp"
+        android:backgroundTint="#b3042b"
+        android:fontFamily="@font/avenirregular"
         android:onClick="irLogin"
         android:text="Visitanos!"
         app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
