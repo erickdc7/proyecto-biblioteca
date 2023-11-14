@@ -1,20 +1,25 @@
-<!-- fragment_settings.xml -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
+
     <FrameLayout
         android:id="@+id/contenedorFragmentoUltimoLibro"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp" />
+
     <TextView
         android:id="@+id/textViewUstedDebe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/contenedorFragmentoUltimoLibro"
         android:layout_centerInParent="true"
-        android:text="Usted debe:"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/avenirregular"
+        android:text="ULTIMO PRESTAMO:"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -23,9 +28,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewUstedDebe"
-        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/avenirregular"
         android:text="Nombre del libro"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="15sp"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/textViewIdPrestamo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNombreLibro"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/avenirregular"
+        android:text="ID del Prestamo: "
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:id="@+id/botonRecogido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewIdPrestamo"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/avenirregular"
+        android:backgroundTint="#b3042b"
+        android:layout_marginTop="50dp"
+        android:text="Visitanos en tu sede mas cercana!"
+        android:visibility="visible" />
+
+    <!-- Otros elementos del archivo XML, si los tienes -->
 
 </RelativeLayout>
+

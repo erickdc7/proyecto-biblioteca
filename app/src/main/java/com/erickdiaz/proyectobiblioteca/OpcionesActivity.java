@@ -47,6 +47,8 @@ public class OpcionesActivity extends AppCompatActivity implements NavigationVie
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
         } else if (item.getItemId() == R.id.nav_settings) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+        } else if (item.getItemId() == R.id.nav_about) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
         } else if (item.getItemId() == R.id.nav_devolucion) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DevolucionFragment()).commit();
         } else if (item.getItemId() == R.id.nav_prestamo) {

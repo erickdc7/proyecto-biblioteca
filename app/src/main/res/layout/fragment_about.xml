@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutFragment">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:ignore="ExtraText">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="329dp"
+        android:layout_height="192dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logoutp" />
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/Bienvenido"
+        android:layout_width="283dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/sobre_nosotros"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:layout_marginTop="30dp"
+        android:text="Biblioteca Central
+Torre Tecnológica II
+Av. Arequipa 265 y 279, Piso 3, Lima
+De lunes a sábado de 2:00 pm a 10:00 pm
+315 – 9600 Anexos 1157"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/BtonVisitanos"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/avenirregular"
+        android:backgroundTint="#b3042b"
+        android:layout_marginTop="40dp"
+        android:onClick="irLogin"
+        android:text="Visitanos!"
+        app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
+    />
+
+</LinearLayout>

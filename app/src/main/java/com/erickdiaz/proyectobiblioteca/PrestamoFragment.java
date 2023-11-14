@@ -1,11 +1,13 @@
 package com.erickdiaz.proyectobiblioteca;
+
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +19,19 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -88,30 +95,21 @@ public class PrestamoFragment extends Fragment {
 
                         // Agregar listeners a los botones después de configurar el adapter
                         Button buttonSolicitarPrestamo = rootView.findViewById(R.id.buttonSolicitarPrestamo);
-                        buttonSolicitarPrestamo.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                solicitarPrestamo();
+                        buttonSolicitarPrestamo.setOnClickListener(v -> {
+                            solicitarPrestamo();
 
-                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.fragment_container, new HomeFragment());
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
-                            }
+                            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, new HomeFragment());
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
                         });
 
                         Button buttonRegresarMenu = rootView.findViewById(R.id.button6);
-                        buttonRegresarMenu.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // Regresar al fragmento HomeFragment
-                                requireActivity().getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.fragment_container, new HomeFragment())
-                                        .commit();
-                            }
-                        });
+                        buttonRegresarMenu.setOnClickListener(v -> requireActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new HomeFragment())
+                                .commit());
                     } else {
                         Toast.makeText(context, "La lista de títulos de libros está vacía o es nula", Toast.LENGTH_SHORT).show();
                     }
@@ -135,6 +133,7 @@ public class PrestamoFragment extends Fragment {
             return;
         }
 
+        String idSolicitud = UUID.randomUUID().toString();
         String libro = spinnerLibros.getSelectedItem().toString();
         String fechaPrestamo = fechaActual;
 
@@ -147,32 +146,99 @@ public class PrestamoFragment extends Fragment {
         }
 
         // Insertar datos en la base de datos SQLite
-        SQLiteDatabase db = null;
-        try {
-            db = dbHelper.getWritableDatabase();
+        try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
             ContentValues values = new ContentValues();
             values.put(DBHelper.COLUMN_LIBRO, libro);
             values.put(DBHelper.COLUMN_FECHA_PRESTAMO, fechaPrestamo);
             values.put(DBHelper.COLUMN_DURACION, duracionPrestamo);
 
+            // Insertar datos y obtener el ID del nuevo préstamo
             long newRowId = db.insert(DBHelper.TABLE_PRESTAMOS, null, values);
 
             if (newRowId != -1) {
-                // Guarda el último libro prestado en SharedPreferences
+                // Guarda el último libro prestado y su ID en SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.last_borrowed_book), libro);
+                editor.putString(getString(R.string.last_borrowed_id), String.valueOf(newRowId));
                 editor.apply();
 
-                Toast.makeText(context, "Préstamo solicitado con éxito", Toast.LENGTH_SHORT).show();
+                // Muestra el cuadro de diálogo con la información del préstamo
+                mostrarInfoPrestamo(libro, String.valueOf(newRowId));
+
+                // Actualiza la vista en el fragmento de configuración
+                actualizarVistasEnSettings(libro, String.valueOf(newRowId));
             } else {
                 Toast.makeText(context, "Error al solicitar el préstamo", Toast.LENGTH_SHORT).show();
             }
         } catch (SQLException e) {
             Toast.makeText(context, "Error al acceder a la base de datos", Toast.LENGTH_SHORT).show();
-        } finally {
-            if (db != null) {
-                db.close();
+        }
+    }
+    private void limpiarDatos() {
+        // Elimina el último libro prestado y su ID de SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(getString(R.string.last_borrowed_book));
+        editor.remove(getString(R.string.last_borrowed_id));
+        editor.apply();
+
+        // Actualiza la vista en el fragmento de configuración
+        actualizarVistas("", "");
+    }
+
+    private void mostrarInfoPrestamo(String libro, String idPrestamo) {
+        // Crear el cuadro de diálogo
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Información de Préstamo");
+        builder.setMessage("Su libro: " + libro + " con ID de préstamo: " + idPrestamo + " está listo para recoger.");
+
+        // Agregar el botón de recogido
+        builder.setPositiveButton("Perfecto", (dialog, which) -> {
+            // Eliminar el último libro prestado y su ID de SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove(getString(R.string.last_borrowed_book));
+            editor.remove(getString(R.string.last_borrowed_id));
+            editor.apply();
+            limpiarDatos();
+
+            // Actualiza la vista en el fragmento de configuración
+            actualizarVistas("", "");
+
+            dialog.dismiss();
+        });
+
+        // Mostrar el cuadro de diálogo
+        builder.create().show();
+    }
+
+    private void actualizarVistas(String ultimoLibroPrestado, String idPrestamo) {
+        TextView textViewUstedDebe = rootView.findViewById(R.id.textViewUstedDebe);
+        TextView textViewNombreLibro = rootView.findViewById(R.id.textViewNombreLibro);
+        TextView textViewIdPrestamo = rootView.findViewById(R.id.textViewIdPrestamo);
+
+        if (textViewUstedDebe != null) {
+            if (ultimoLibroPrestado.isEmpty()) {
+                textViewUstedDebe.setVisibility(View.GONE);
+                textViewNombreLibro.setText("No ha realizado préstamos recientes");
+            } else {
+                textViewUstedDebe.setVisibility(View.VISIBLE);
+                textViewNombreLibro.setText("Usted debe: " + ultimoLibroPrestado);
+                textViewIdPrestamo.setText("ID de préstamo: " + idPrestamo);
             }
         }
     }
+
+    public void actualizarVistasPublic(String ultimoLibroPrestado, String idPrestamo) {
+        actualizarVistas(ultimoLibroPrestado, idPrestamo);
+    }
+
+    private void actualizarVistasEnSettings(String ultimoLibroPrestado, String idPrestamo) {
+        Fragment settingsFragment = getActivity().getSupportFragmentManager().findFragmentByTag(SettingsFragment.class.getSimpleName());
+        if (settingsFragment != null && settingsFragment.isVisible()) {
+            PrestamoFragment prestamoFragment = (PrestamoFragment) getParentFragment();
+            if (prestamoFragment != null) {
+                prestamoFragment.actualizarVistasPublic(ultimoLibroPrestado, idPrestamo);
+            }
+        }
+    }
+
 }
