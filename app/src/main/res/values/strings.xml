@@ -2,7 +2,7 @@
     <string name="app_name">BibliotecaUTP</string>
     <string name="registro_de_devolucion">Registro de Devolución</string>
     <string name="usuario">Usuario</string>
-    <string name="ingrese_usuario">Ingrese usuario</string>
+    <string name="ingrese_usuario">Código de alumno</string>
     <string name="nombre_del_libro">Nombre del Libro</string>
     <string name="ingrese_libro">Ingrese Libro</string>
     <string name="fecha_de_prestamo">Fecha de Préstamo</string>
