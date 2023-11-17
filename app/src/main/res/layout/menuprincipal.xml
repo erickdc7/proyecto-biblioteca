@@ -29,11 +29,12 @@
         android:id="@+id/BtonBienve"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/avenirregular"
-        android:backgroundTint="#b3042b"
         android:layout_marginTop="40dp"
+        android:backgroundTint="#b3042b"
+        android:fontFamily="@font/avenirregular"
         android:onClick="irLogin"
         android:text="@string/comenzar"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
     />
 
