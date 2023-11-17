@@ -12,6 +12,12 @@
             tools:ignore="HardcodedText" />
 
         <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/nav_settings"
+            android:title="Perfil"
+            tools:ignore="HardcodedText" />
+
+        <item
             android:id="@+id/nav_devolucion"
             android:icon="@drawable/nav_devolucion"
             android:title="Solicitud de devolución"
@@ -21,12 +27,6 @@
             android:id="@+id/nav_prestamo"
             android:icon="@drawable/nav_devolucion"
             android:title="Solicitud de préstamo"
-            tools:ignore="HardcodedText" />
-
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/nav_settings"
-            android:title="Perfil"
             tools:ignore="HardcodedText" />
 
         <item
