@@ -20,14 +20,50 @@
         android:layout_width="283dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Biblioteca Central
-Torre Tecnológica II
-Av. Arequipa 265 y 279, Piso 3, Lima
-De lunes a sábado de 2:00 pm a 10:00 pm
-315 – 9600 Anexos 1157"
+        android:text="Biblioteca Central UTP"
         android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Ubicacion"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Ubicación:"
+        android:textAlignment="textStart"
         android:textSize="15sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Ubicacion1"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Av. Arequipa 265 y 279, Piso 3, Lima"
+        android:textAlignment="textStart"
+        android:textSize="15sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/HorarioAtencion"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Horario de atención:"
+        android:textAlignment="textStart"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/HorarioAtencion1"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Lun - Sab: 8:30 a.m. a 8:00 p.m."
+        android:textAlignment="textStart"
+        android:textSize="15sp"
+        android:textStyle="normal" />
 
     <Button
         android:id="@+id/BtonVisitanos"
@@ -37,7 +73,7 @@ De lunes a sábado de 2:00 pm a 10:00 pm
         android:backgroundTint="#b3042b"
         android:fontFamily="@font/avenirregular"
         android:onClick="irLogin"
-        android:text="Visitanos!"
+        android:text="¡Visitanos!"
         app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
     />
 
