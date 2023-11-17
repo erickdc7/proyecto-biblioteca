@@ -59,7 +59,14 @@
         android:text="Visitanos en tu sede mas cercana!"
         android:visibility="visible" />
 
+    <!-- Agregar el BarChart debajo del botón -->
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/botonRecogido"
+        android:layout_marginTop="16dp"/>
+
     <!-- Otros elementos del archivo XML, si los tienes -->
 
 </RelativeLayout>
-
