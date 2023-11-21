@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -143,6 +144,8 @@ public class PrestamoFragment extends Fragment {
         if (libro.isEmpty() || fechaPrestamo.isEmpty() || duracionPrestamo.isEmpty()) {
             Toast.makeText(context, "Completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
+
+
         }
 
         // Insertar datos en la base de datos SQLite
@@ -173,6 +176,21 @@ public class PrestamoFragment extends Fragment {
         } catch (SQLException e) {
             Toast.makeText(context, "Error al acceder a la base de datos", Toast.LENGTH_SHORT).show();
         }
+        String fechaDevolucion = calcularFechaDevolucion(fechaPrestamo, duracionPrestamo);
+        DataHolder.getInstance().setFechaDevolucion(fechaDevolucion);
+        Bundle bundle = new Bundle();
+        bundle.putString("editFechaDevolucion", fechaDevolucion);
+
+        // Crear una instancia del fragmento solicituddevolucion y asignarle el Bundle
+        DevolucionFragment solicitudDevolucionFragment = new DevolucionFragment();
+        solicitudDevolucionFragment.setArguments(bundle);
+
+        // Reemplazar el fragmento actual con el fragmento solicituddevolucion
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, solicitudDevolucionFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
     private void limpiarDatos() {
         // Elimina el último libro prestado y su ID de SharedPreferences
@@ -240,5 +258,45 @@ public class PrestamoFragment extends Fragment {
             }
         }
     }
+
+
+    private String calcularFechaDevolucion(String fechaPrestamo, String duracionPrestamo) {
+        // Obtener la duración del préstamo en días
+        int diasPrestamo = 0;
+        switch (duracionPrestamo) {
+            case "5 días":
+                diasPrestamo = 5;
+                break;
+            case "10 días":
+                diasPrestamo = 10;
+                break;
+            case "15 días":
+                diasPrestamo = 15;
+                break;
+        }
+
+        // Calcular la fecha de devolución
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date fechaPrestamoDate = sdf.parse(fechaPrestamo);
+            if (fechaPrestamoDate != null) {
+                long tiempoEnMilisegundos = fechaPrestamoDate.getTime();
+                long tiempoDevolucion = tiempoEnMilisegundos + (diasPrestamo * 24 * 60 * 60 * 1000);
+                Date fechaDevolucionDate = new Date(tiempoDevolucion);
+                return sdf.format(fechaDevolucionDate);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // En caso de error, devolver una cadena vacía
+        return "";
+    }
+
+
+
+
+
+
 
 }
