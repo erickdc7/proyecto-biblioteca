@@ -23,14 +23,13 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsFragment extends Fragment implements IAxisValueFormatter {
+public class SettingsFragment extends Fragment {
 
     private TextView textViewUstedDebe;
     private TextView textViewNombreLibro;
@@ -94,26 +93,24 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setLabelCount(5, true);
         leftAxis.setSpaceTop(15f);
-        leftAxis.setAxisMinimum(0f); // Asegúrate de establecer el valor mínimo del eje y
+        leftAxis.setAxisMinimum(0f);
         leftAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                // Aquí puedes formatear los valores del eje y según tus necesidades
-                // Por ejemplo, podrías redondearlos o mostrarlos como enteros
                 return String.valueOf((int) value);
             }
         });
-        leftAxis.setAxisMaximum(getMaxValueFromData() + 1); // Suma 1 para evitar superposiciones
+        leftAxis.setAxisMaximum(getMaxValueFromData() + 1);
 
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setLabelCount(5, false);
         rightAxis.setSpaceTop(15f);
         rightAxis.setAxisMinimum(0f);
-        rightAxis.setEnabled(false); // Desactiva el eje derecho si no lo necesitas
+        rightAxis.setEnabled(false);
 
         BarDataSet barDataSet = new BarDataSet(new ArrayList<>(), "Libros Prestados");
-        barDataSet.setBarBorderWidth(1f); // Esto ajusta el ancho de las barras
-        barDataSet.setBarBorderColor(ContextCompat.getColor(requireContext(), R.color.colorAccent)); // Esto ajusta el color del borde de las barras
+        barDataSet.setBarBorderWidth(1f);
+        barDataSet.setBarBorderColor(ContextCompat.getColor(requireContext(), R.color.colorAccent));
 
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
@@ -148,8 +145,7 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
                     }
                 }
             } else {
-                // Manejar el caso donde la columna no existe en el cursor
-                // Puedes mostrar un mensaje de error o tomar alguna acción apropiada
+                // Handle the case where the column doesn't exist in the cursor
             }
 
             cursor.close();
@@ -160,7 +156,6 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
 
         return maxValue;
     }
-
 
     private void updateChart() {
         List<BarEntry> entries = getChartData();
@@ -180,20 +175,9 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
         barChart.invalidate();
     }
 
-    @Override
-    public String getFormattedValue(float value, AxisBase axis) {
-        List<String> labels = getLabels();
-        if (value >= 0 && value < labels.size()) {
-            return labels.get((int) value);
-        } else {
-            return "";
-        }
-    }
-
     private List<BarEntry> getChartData() {
         List<BarEntry> entries = new ArrayList<>();
 
-        // Consulta la base de datos para obtener los datos
         DBHelper dbHelper = new DBHelper(requireContext());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 
@@ -211,7 +195,6 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
             int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
             int cantidadIndex = cursor.getColumnIndex(DBHelper.COLUMN_CANTIDAD_PRESTAMOS);
 
-            // Verifica que las columnas existan en el cursor
             if (libroIndex != -1 && cantidadIndex != -1) {
                 int index = 0;
 
@@ -222,8 +205,7 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
                     index++;
                 }
             } else {
-                // Manejar el caso donde las columnas no existen en el cursor
-                // Puedes mostrar un mensaje de error o tomar alguna acción apropiada
+                // Handle the case where the columns don't exist in the cursor
             }
 
             cursor.close();
@@ -284,22 +266,18 @@ public class SettingsFragment extends Fragment implements IAxisValueFormatter {
                 int libroColumnIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
                 int idColumnIndex = cursor.getColumnIndex(DBHelper.COLUMN_ID);
 
-                // Verifica que las columnas existan en el cursor
                 if (libroColumnIndex != -1 && idColumnIndex != -1) {
                     String ultimoLibroPrestado = cursor.getString(libroColumnIndex);
                     String idPrestamo = cursor.getString(idColumnIndex);
 
-                    // Actualiza la interfaz de usuario con los datos de la base de datos
                     updateUI(ultimoLibroPrestado, idPrestamo);
-                    // Actualiza el gráfico
                     updateChart();
                 } else {
-                    // Maneja el caso donde las columnas no existen en el cursor
-                    // Puedes mostrar un mensaje de error o tomar alguna acción apropiada
+                    // Handle the case where the columns don't exist in the cursor
                     updateUI("", "");
                 }
             } else {
-                // Maneja el caso donde no hay datos en el cursor
+                // Handle the case where there's no data in the cursor
                 updateUI("", "");
             }
         }
