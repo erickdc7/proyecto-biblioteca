@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -247,9 +248,31 @@ public class SettingsFragment extends Fragment {
                 textViewUstedDebe.setVisibility(View.VISIBLE);
                 textViewNombreLibro.setText("Usted debe: " + ultimoLibroPrestado);
                 textViewIdPrestamo.setText("ID de préstamo: " + idPrestamo);
+
+                // Obtén el libro que se está devolviendo desde SharedPreferences
+                String libroDevuelto = sharedPreferences.getString(getString(R.string.last_borrowed_book), "");
+
+                // Verifica si el libro devuelto es el mismo que se muestra en la interfaz de usuario
+                if (!libroDevuelto.isEmpty() && libroDevuelto.equals(ultimoLibroPrestado)) {
+                    // Muestra un mensaje indicando que no se debe ningún libro
+                    Toast.makeText(requireContext(), "No debe ningún libro", Toast.LENGTH_SHORT).show();
+
+                    // Limpia las preferencias ya que se ha devuelto el libro
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.remove(getString(R.string.last_borrowed_book));
+                    editor.remove(getString(R.string.last_borrowed_id));
+                    editor.apply();
+
+                    // Actualiza la interfaz para reflejar que no hay préstamos recientes
+                    textViewUstedDebe.setVisibility(View.GONE);
+                    textViewNombreLibro.setText("No ha realizado préstamos recientes");
+                    textViewIdPrestamo.setText("");
+
+                }
             }
         }
     }
+
 
     private void abrirGoogleMaps() {
         String ubicacion = "https://www.google.com/maps/search/279,+Av.+Arequipa+265,+Lima+15046/@-12.0685064,-77.0388615,17z/data=!3m1!4b1?entry=ttu";
