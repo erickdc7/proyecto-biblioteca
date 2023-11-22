@@ -57,14 +57,14 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
-        android:id="@+id/CrearUsuario"
+        android:id="@+id/SolicitarUsuario"
         android:layout_width="250dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/avenirregular"
         android:backgroundTint="#b3042b"
-        android:onClick="RegistrarUsu"
-        android:text="@string/registrar"
+        android:onClick="SolicitarUsuario"
+        android:text="Solicitar Credenciales"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -107,10 +107,7 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(men);
     }
 
-    public void iraRegistro(View v) {
-        Intent reg = new Intent(this, UsuarioActivity.class);
-        startActivity(reg);
-    }
+
     // Agrega un método para abrir el menú de opciones desde el encabezado
 
     public void abrirMenu(View v) {

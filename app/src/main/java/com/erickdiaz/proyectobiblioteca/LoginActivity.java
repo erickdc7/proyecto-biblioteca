@@ -1,6 +1,7 @@
 package com.erickdiaz.proyectobiblioteca;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -88,8 +89,25 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    public void RegistrarUsu(View v) {
-        Intent intent = new Intent(this, UsuarioActivity.class);
-        startActivity(intent);
+    public void SolicitarUsuario(View v) {
+        // Número de teléfono y mensaje predefinido
+        String phoneNumber = "51960252970";  // Agrega el código de país según tu necesidad
+        String message = "Solicito mis Credenciales para ingresar al App UTP Biblioteca";
+
+        // Forma la URI de WhatsApp
+        String uri = "https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + Uri.encode(message);
+
+        // Crea un Intent con la acción ACTION_VIEW y la URI de WhatsApp
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(uri));
+
+        // Verifica si la aplicación de WhatsApp está instalada en el dispositivo
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Abre la aplicación de WhatsApp
+            startActivity(intent);
+        } else {
+            // Muestra un mensaje si la aplicación de WhatsApp no está instalada
+            Toast.makeText(this, "WhatsApp no está instalado en este dispositivo", Toast.LENGTH_SHORT).show();
+        }
     }
 }

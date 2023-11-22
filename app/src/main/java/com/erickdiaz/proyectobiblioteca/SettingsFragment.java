@@ -1,5 +1,7 @@
 package com.erickdiaz.proyectobiblioteca;
 
+
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -9,15 +11,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -27,6 +28,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SettingsFragment extends Fragment {
@@ -57,13 +59,12 @@ public class SettingsFragment extends Fragment {
 
         setupBarChart();
 
+        updateChart();
+
         loadDataFromDatabase();
-        botonRecogido.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirGoogleMaps();
-            }
-        });
+
+        botonRecogido.setOnClickListener(v -> abrirGoogleMaps());
+
         return rootView;
     }
 
@@ -94,13 +95,7 @@ public class SettingsFragment extends Fragment {
         leftAxis.setLabelCount(5, true);
         leftAxis.setSpaceTop(15f);
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                return String.valueOf((int) value);
-            }
-        });
-        leftAxis.setAxisMaximum(getMaxValueFromData() + 1);
+        leftAxis.setAxisMaximum(15f);  // Ajusta según tus necesidades
 
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setLabelCount(5, false);
@@ -115,50 +110,19 @@ public class SettingsFragment extends Fragment {
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
 
+        // Asigna el formateador de valores personalizado al eje X
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(getChartLabels()));
+
+        YAxisValueFormatter yAxisValueFormatter = new YAxisValueFormatter();
+        leftAxis.setValueFormatter(yAxisValueFormatter);
+
         barChart.getLegend().setEnabled(false);
     }
 
-    private float getMaxValueFromData() {
-        DBHelper dbHelper = new DBHelper(requireContext());
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-
-        Cursor cursor = database.query(
-                DBHelper.TABLE_PRESTAMOS,
-                new String[]{DBHelper.COLUMN_CANTIDAD_PRESTAMOS},
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        float maxValue = 0;
-
-        if (cursor != null) {
-            int cantidadIndex = cursor.getColumnIndex(DBHelper.COLUMN_CANTIDAD_PRESTAMOS);
-
-            if (cantidadIndex != -1) {
-                while (cursor.moveToNext()) {
-                    int cantidadPrestamos = cursor.getInt(cantidadIndex);
-                    if (cantidadPrestamos > maxValue) {
-                        maxValue = cantidadPrestamos;
-                    }
-                }
-            } else {
-                // Handle the case where the column doesn't exist in the cursor
-            }
-
-            cursor.close();
-        }
-
-        database.close();
-        dbHelper.close();
-
-        return maxValue;
-    }
 
     private void updateChart() {
         List<BarEntry> entries = getChartData();
+        List<String> labels = getChartLabels();
 
         BarDataSet barDataSet = new BarDataSet(entries, "Libros Prestados");
 
@@ -167,60 +131,17 @@ public class SettingsFragment extends Fragment {
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
-        YAxis yAxisRight = barChart.getAxisRight();
-        yAxisRight.setEnabled(false);
+        YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setValueFormatter(new IndexAxisValueFormatter(labels));  // Usa el formateador de valores personalizado
 
         barChart.invalidate();
     }
 
-    private List<BarEntry> getChartData() {
-        List<BarEntry> entries = new ArrayList<>();
-
-        DBHelper dbHelper = new DBHelper(requireContext());
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-
-        Cursor cursor = database.query(
-                DBHelper.TABLE_PRESTAMOS,
-                new String[]{DBHelper.COLUMN_LIBRO, DBHelper.COLUMN_CANTIDAD_PRESTAMOS},
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        if (cursor != null) {
-            int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
-            int cantidadIndex = cursor.getColumnIndex(DBHelper.COLUMN_CANTIDAD_PRESTAMOS);
-
-            if (libroIndex != -1 && cantidadIndex != -1) {
-                int index = 0;
-
-                while (cursor.moveToNext()) {
-                    String libro = cursor.getString(libroIndex);
-                    int cantidadPrestamos = cursor.getInt(cantidadIndex);
-                    entries.add(new BarEntry(index, cantidadPrestamos));
-                    index++;
-                }
-            } else {
-                // Handle the case where the columns don't exist in the cursor
-            }
-
-            cursor.close();
-        }
-
-        database.close();
-        dbHelper.close();
-
-        return entries;
-    }
-
-    private List<String> getLabels() {
+    private List<String> getChartLabels() {
         List<String> labels = new ArrayList<>();
 
-        DBHelper dbHelper = new DBHelper(requireContext());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 
         Cursor cursor = database.query(
@@ -228,15 +149,16 @@ public class SettingsFragment extends Fragment {
                 new String[]{DBHelper.COLUMN_LIBRO},
                 null,
                 null,
-                null,
+                DBHelper.COLUMN_LIBRO,
                 null,
                 null
         );
 
         if (cursor != null) {
-            while (cursor.moveToNext()) {
-                int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
-                if (libroIndex != -1) {
+            int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
+
+            if (libroIndex != -1) {
+                while (cursor.moveToNext()) {
                     String libro = cursor.getString(libroIndex);
                     labels.add(libro);
                 }
@@ -246,10 +168,64 @@ public class SettingsFragment extends Fragment {
         }
 
         database.close();
-        dbHelper.close();
 
         return labels;
     }
+
+    private List<BarEntry> getChartData() {
+        List<BarEntry> entries = new ArrayList<>();
+        List<String> labels = new ArrayList<>();  // Lista para almacenar los nombres de los libros
+
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        Cursor cursor = database.query(
+                DBHelper.TABLE_PRESTAMOS,
+                new String[]{DBHelper.COLUMN_LIBRO, DBHelper.COLUMN_CANTIDAD_PRESTAMOS},
+                null,
+                null,
+                DBHelper.COLUMN_LIBRO,
+                null,
+                null
+        );
+
+        if (cursor != null) {
+            int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
+            int cantidadIndex = cursor.getColumnIndex(DBHelper.COLUMN_CANTIDAD_PRESTAMOS);
+
+            if (libroIndex != -1 && cantidadIndex != -1) {
+                int index = 0;  // Índice para rastrear la posición en el eje X
+                while (cursor.moveToNext()) {
+                    String libro = cursor.getString(libroIndex);
+                    int cantidadPrestamos = cursor.getInt(cantidadIndex);
+
+                    labels.add(libro);  // Agrega el nombre del libro a la lista de etiquetas
+
+                    entries.add(new BarEntry(index, cantidadPrestamos));
+                    index++;
+                }
+            }
+
+            cursor.close();
+        }
+
+        database.close();
+
+        // Asigna el formateador de etiquetas personalizado al eje X
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+
+        return entries;
+    }
+
+    private static class YAxisValueFormatter extends ValueFormatter {
+        @Override
+        public String getFormattedValue(float value) {
+            return String.valueOf((int) value);
+        }
+    }
+
+
+
 
     private void obtenerUltimoLibroPrestadoDesdeBaseDeDatos() {
         try (Cursor cursor = dbHelper.getReadableDatabase().query(
@@ -273,11 +249,9 @@ public class SettingsFragment extends Fragment {
                     updateUI(ultimoLibroPrestado, idPrestamo);
                     updateChart();
                 } else {
-                    // Handle the case where the columns don't exist in the cursor
                     updateUI("", "");
                 }
             } else {
-                // Handle the case where there's no data in the cursor
                 updateUI("", "");
             }
         }

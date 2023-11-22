@@ -295,8 +295,4 @@ public class PrestamoFragment extends Fragment {
 
 
 
-
-
-
-
 }
