@@ -1,7 +1,5 @@
 package com.erickdiaz.proyectobiblioteca;
 
-
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -38,6 +36,7 @@ public class SettingsFragment extends Fragment {
     private TextView textViewIdPrestamo;
 
     private Button botonRecogido;
+    private List<String> labels = new ArrayList<>();  // Variable miembro para almacenar los nombres de los libros
 
     private BarChart barChart;
 
@@ -95,12 +94,8 @@ public class SettingsFragment extends Fragment {
         leftAxis.setLabelCount(5, true);
         leftAxis.setSpaceTop(15f);
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(15f);  // Ajusta según tus necesidades
 
         YAxis rightAxis = barChart.getAxisRight();
-        rightAxis.setLabelCount(5, false);
-        rightAxis.setSpaceTop(15f);
-        rightAxis.setAxisMinimum(0f);
         rightAxis.setEnabled(false);
 
         BarDataSet barDataSet = new BarDataSet(new ArrayList<>(), "Libros Prestados");
@@ -111,7 +106,8 @@ public class SettingsFragment extends Fragment {
         barChart.setData(barData);
 
         // Asigna el formateador de valores personalizado al eje X
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(getChartLabels()));
+        XAxisValueFormatter xAxisValueFormatter = new XAxisValueFormatter(labels);
+        xAxis.setValueFormatter(xAxisValueFormatter);
 
         YAxisValueFormatter yAxisValueFormatter = new YAxisValueFormatter();
         leftAxis.setValueFormatter(yAxisValueFormatter);
@@ -119,57 +115,15 @@ public class SettingsFragment extends Fragment {
         barChart.getLegend().setEnabled(false);
     }
 
-
     private void updateChart() {
         List<BarEntry> entries = getChartData();
-        List<String> labels = getChartLabels();
 
         BarDataSet barDataSet = new BarDataSet(entries, "Libros Prestados");
 
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
 
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-
-        YAxis leftAxis = barChart.getAxisLeft();
-        leftAxis.setValueFormatter(new IndexAxisValueFormatter(labels));  // Usa el formateador de valores personalizado
-
         barChart.invalidate();
-    }
-
-    private List<String> getChartLabels() {
-        List<String> labels = new ArrayList<>();
-
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-
-        Cursor cursor = database.query(
-                DBHelper.TABLE_PRESTAMOS,
-                new String[]{DBHelper.COLUMN_LIBRO},
-                null,
-                null,
-                DBHelper.COLUMN_LIBRO,
-                null,
-                null
-        );
-
-        if (cursor != null) {
-            int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
-
-            if (libroIndex != -1) {
-                while (cursor.moveToNext()) {
-                    String libro = cursor.getString(libroIndex);
-                    labels.add(libro);
-                }
-            }
-
-            cursor.close();
-        }
-
-        database.close();
-
-        return labels;
     }
 
     private List<BarEntry> getChartData() {
@@ -188,20 +142,24 @@ public class SettingsFragment extends Fragment {
                 null
         );
 
+        HashMap<String, Integer> librosPrestados = new HashMap<>();
+
         if (cursor != null) {
             int libroIndex = cursor.getColumnIndex(DBHelper.COLUMN_LIBRO);
             int cantidadIndex = cursor.getColumnIndex(DBHelper.COLUMN_CANTIDAD_PRESTAMOS);
 
             if (libroIndex != -1 && cantidadIndex != -1) {
-                int index = 0;  // Índice para rastrear la posición en el eje X
                 while (cursor.moveToNext()) {
                     String libro = cursor.getString(libroIndex);
                     int cantidadPrestamos = cursor.getInt(cantidadIndex);
 
-                    labels.add(libro);  // Agrega el nombre del libro a la lista de etiquetas
-
-                    entries.add(new BarEntry(index, cantidadPrestamos));
-                    index++;
+                    if (librosPrestados.containsKey(libro)) {
+                        // Si el libro ya está en el HashMap, actualiza la cantidad acumulada
+                        librosPrestados.put(libro, librosPrestados.get(libro) + cantidadPrestamos);
+                    } else {
+                        // Si el libro no está en el HashMap, agrégalo
+                        librosPrestados.put(libro, cantidadPrestamos);
+                    }
                 }
             }
 
@@ -210,11 +168,37 @@ public class SettingsFragment extends Fragment {
 
         database.close();
 
+        // Convierte el HashMap en entradas para el gráfico
+        int index = 0;
+        for (String libro : librosPrestados.keySet()) {
+            labels.add(libro);  // Agrega el nombre del libro a la lista de etiquetas
+            entries.add(new BarEntry(index, librosPrestados.get(libro)));
+            index++;
+        }
+
         // Asigna el formateador de etiquetas personalizado al eje X
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
         return entries;
+    }
+
+    private static class XAxisValueFormatter extends IndexAxisValueFormatter {
+
+        private final List<String> labels;
+
+        public XAxisValueFormatter(List<String> labels) {
+            this.labels = labels;
+        }
+
+        @Override
+        public String getFormattedValue(float value) {
+            int index = (int) value;
+            if (index >= 0 && index < labels.size()) {
+                return labels.get(index);
+            }
+            return "";
+        }
     }
 
     private static class YAxisValueFormatter extends ValueFormatter {
@@ -223,9 +207,6 @@ public class SettingsFragment extends Fragment {
             return String.valueOf((int) value);
         }
     }
-
-
-
 
     private void obtenerUltimoLibroPrestadoDesdeBaseDeDatos() {
         try (Cursor cursor = dbHelper.getReadableDatabase().query(
