@@ -254,8 +254,6 @@ public class SettingsFragment extends Fragment {
 
                 // Verifica si el libro devuelto es el mismo que se muestra en la interfaz de usuario
                 if (!libroDevuelto.isEmpty() && libroDevuelto.equals(ultimoLibroPrestado)) {
-                    // Muestra un mensaje indicando que no se debe ningún libro
-                    Toast.makeText(requireContext(), "No debe ningún libro", Toast.LENGTH_SHORT).show();
 
                     // Limpia las preferencias ya que se ha devuelto el libro
                     SharedPreferences.Editor editor = sharedPreferences.edit();
