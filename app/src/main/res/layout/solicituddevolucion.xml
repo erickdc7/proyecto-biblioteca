@@ -11,23 +11,26 @@
         tools:context=".DevolucionActivity"
         tools:ignore="ScrollViewSize">
 
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/ImageView"
-            android:layout_width="154dp"
-            android:layout_height="80dp"
+
+            android:layout_width="235dp"
+            android:layout_height="68dp"
             android:layout_marginTop="16dp"
-            android:contentDescription="aqui_va_la_imagen"
+            android:src="@drawable/devolver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/libro1"
             tools:ignore="HardcodedText" />
 
+
+
         <TextView
             android:id="@+id/labelRegistro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/avenirregular"
             android:text="@string/registro_de_devolucion"
             android:textAlignment="center"
@@ -72,8 +75,8 @@
             android:id="@+id/FechaPrestamo"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/avenirregular"
 
             android:text="@string/fecha_de_prestamo"
@@ -102,8 +105,8 @@
             android:id="@+id/FechaDevolucion"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/avenirregular"
 
             android:text="@string/fecha_de_devolucion"
@@ -131,12 +134,14 @@
             android:id="@+id/Botonconfirm"
             android:layout_width="250dp"
             android:layout_height="0dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#b3042b"
             android:fontFamily="@font/avenirregular"
             android:text="@string/confirmar_devolucion"
             android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editFechaDevolucion" />
 
