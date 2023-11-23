@@ -8,33 +8,40 @@
     android:orientation="vertical"
     tools:ignore="ExtraText">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/logo"
-        android:src="@drawable/bibliotecalogin" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/ImageView"
+
+        android:layout_width="208dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="15dp"
+        android:contentDescription="@string/aqui_va_la_imagen"
+        android:src="@drawable/lib"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Bienvenido"
         android:layout_width="283dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/bienvenido_a_la_biblioteca"
+        android:text="Biblioteca UTP"
+        android:fontFamily="@font/avenirregular"
+
         android:textAlignment="center"
-        android:textSize="32sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/BtonBienve"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="#b3042b"
         android:fontFamily="@font/avenirregular"
         android:onClick="irLogin"
-        android:text="@string/comenzar"
-        android:textSize="16sp"
+        android:text="Comenzar"
+        android:textSize="25sp"
         app:layout_constraintTop_toBottomOf="@+id/Bienvenido" />
     />
 

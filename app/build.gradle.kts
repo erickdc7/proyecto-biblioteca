@@ -39,6 +39,7 @@ dependencies {
     implementation ("androidx.preference:preference:1.1.1")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("com.github.PhilJay:MPAndroidChart:master-SNAPSHOT")
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
 
     implementation ("com.android.volley:volley:1.1.1")
     implementation ("androidx.appcompat:appcompat:1.6.1")

@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/ImageView"
+
         android:layout_width="208dp"
         android:layout_height="135dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="48dp"
         android:contentDescription="@string/aqui_va_la_imagen"
-        android:src="@drawable/logoutp"
+        android:src="@drawable/utplogoprueba"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
