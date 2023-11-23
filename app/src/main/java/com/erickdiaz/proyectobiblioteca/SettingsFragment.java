@@ -254,7 +254,7 @@ public class SettingsFragment extends Fragment {
 
                 // Verifica si el libro devuelto es el mismo que se muestra en la interfaz de usuario
                 if (!libroDevuelto.isEmpty() && libroDevuelto.equals(ultimoLibroPrestado)) {
-   
+
                     // Limpia las preferencias ya que se ha devuelto el libro
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.remove(getString(R.string.last_borrowed_book));
